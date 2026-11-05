@@ -160,3 +160,6 @@ Do not treat model-generated prelabels as ground truth until they have been
 independently reviewed. Keep TensorRT engines, raw recordings, and private
 annotations out of Git; the project `.gitignore` excludes local media and
 benchmark outputs.
+
+
+Historical detector and live pipeline measurements from the original SCOUT SAR work are preserved in [SAR historical benchmark notes](docs/SAR-historical-benchmark-notes.md). The reviewed SAR v1 annotations and the explicitly unreviewed model prelabels are under `evaluation/`; YOLO sweep reports are under `models/`. Source clips are downloaded with `scripts/download-sample-videos.sh`; they are intentionally not committed.
