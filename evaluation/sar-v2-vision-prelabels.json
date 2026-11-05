@@ -1,0 +1,2974 @@
+{
+  "description": "Vision-assisted pre-labels sampled every 3 seconds across all four selectable hiking/park clips. Coordinates are source-frame XYXY pixels; classes use COCO ids.",
+  "status": "PRELABELS_ONLY_NOT_GROUND_TRUTH",
+  "evaluation_ready": false,
+  "reason": "Most boxes are YOLO26n proposals and are not independently verified instance by instance. Visual audit found missed people and one false vehicle; this file must be reviewed before recall/precision scoring.",
+  "model": "YOLO26n TensorRT FP16, 768x768 input",
+  "sampling": "1s start, then every 3s to clip end (84 frames total)",
+  "proposal_thresholds": {
+    "person_class_0": 0.5,
+    "backpack_class_24": 0.1
+  },
+  "review_notes": [
+    "Vehicle proposal at grand-canyon-guided-hike-2.mp4 37s was a false car label on a partial hiker/backpack and was excluded.",
+    "The visual audit found missed people in Acadia clips; zero model boxes do not mean zero ground-truth objects.",
+    "No positive vehicle examples were visually confirmed in the sampled frames."
+  ],
+  "images": [
+    {
+      "id": "acadia-hiking-people-1080p-0010",
+      "video": "../media/acadia-hiking-people-1080p.mp4",
+      "time_seconds": 1.0,
+      "width": 1920,
+      "height": 1080,
+      "annotations": []
+    },
+    {
+      "id": "acadia-hiking-people-1080p-0040",
+      "video": "../media/acadia-hiking-people-1080p.mp4",
+      "time_seconds": 4.0,
+      "width": 1920,
+      "height": 1080,
+      "annotations": []
+    },
+    {
+      "id": "acadia-hiking-people-1080p-0070",
+      "video": "../media/acadia-hiking-people-1080p.mp4",
+      "time_seconds": 7.0,
+      "width": 1920,
+      "height": 1080,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            1074,
+            367,
+            1187,
+            649
+          ],
+          "proposal_score": 0.8677,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "acadia-hiking-people-1080p-0100",
+      "video": "../media/acadia-hiking-people-1080p.mp4",
+      "time_seconds": 10.0,
+      "width": 1920,
+      "height": 1080,
+      "annotations": []
+    },
+    {
+      "id": "acadia-hiking-people-1080p-0130",
+      "video": "../media/acadia-hiking-people-1080p.mp4",
+      "time_seconds": 13.0,
+      "width": 1920,
+      "height": 1080,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            1313,
+            375,
+            1450,
+            601
+          ],
+          "proposal_score": 0.8354,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            799,
+            326,
+            948,
+            742
+          ],
+          "proposal_score": 0.8164,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            793,
+            420,
+            874,
+            547
+          ],
+          "proposal_score": 0.3435,
+          "proposal_class": "backpack"
+        }
+      ]
+    },
+    {
+      "id": "acadia-hiking-people-1080p-0160",
+      "video": "../media/acadia-hiking-people-1080p.mp4",
+      "time_seconds": 16.0,
+      "width": 1920,
+      "height": 1080,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            923,
+            140,
+            1001,
+            351
+          ],
+          "proposal_score": 0.8125,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "acadia-hiking-people-1080p-0190",
+      "video": "../media/acadia-hiking-people-1080p.mp4",
+      "time_seconds": 19.0,
+      "width": 1920,
+      "height": 1080,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            368,
+            183,
+            597,
+            698
+          ],
+          "proposal_score": 0.916,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            442,
+            262,
+            558,
+            416
+          ],
+          "proposal_score": 0.4941,
+          "proposal_class": "backpack"
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            534,
+            270,
+            596,
+            405
+          ],
+          "proposal_score": 0.17,
+          "proposal_class": "backpack"
+        }
+      ]
+    },
+    {
+      "id": "acadia-hiking-people-1080p-0220",
+      "video": "../media/acadia-hiking-people-1080p.mp4",
+      "time_seconds": 22.0,
+      "width": 1920,
+      "height": 1080,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            1643,
+            553,
+            1832,
+            892
+          ],
+          "proposal_score": 0.9336,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "acadia-hiking-people-1080p-0250",
+      "video": "../media/acadia-hiking-people-1080p.mp4",
+      "time_seconds": 25.0,
+      "width": 1920,
+      "height": 1080,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            976,
+            490,
+            1049,
+            636
+          ],
+          "proposal_score": 0.667,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            792,
+            476,
+            831,
+            574
+          ],
+          "proposal_score": 0.5679,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            721,
+            456,
+            758,
+            545
+          ],
+          "proposal_score": 0.5469,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            836,
+            476,
+            897,
+            597
+          ],
+          "proposal_score": 0.5293,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "acadia-hiking-people-1080p-0280",
+      "video": "../media/acadia-hiking-people-1080p.mp4",
+      "time_seconds": 28.0,
+      "width": 1920,
+      "height": 1080,
+      "annotations": []
+    },
+    {
+      "id": "acadia-hiking-people-1080p-0310",
+      "video": "../media/acadia-hiking-people-1080p.mp4",
+      "time_seconds": 31.0,
+      "width": 1920,
+      "height": 1080,
+      "annotations": []
+    },
+    {
+      "id": "acadia-park-staff-0010",
+      "video": "../media/acadia-park-staff.mp4",
+      "time_seconds": 1.0,
+      "width": 854,
+      "height": 480,
+      "annotations": []
+    },
+    {
+      "id": "acadia-park-staff-0040",
+      "video": "../media/acadia-park-staff.mp4",
+      "time_seconds": 4.0,
+      "width": 854,
+      "height": 480,
+      "annotations": []
+    },
+    {
+      "id": "acadia-park-staff-0070",
+      "video": "../media/acadia-park-staff.mp4",
+      "time_seconds": 7.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            189,
+            48,
+            482,
+            474
+          ],
+          "proposal_score": 0.9385,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            721,
+            405,
+            853,
+            479
+          ],
+          "proposal_score": 0.646,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "acadia-park-staff-0100",
+      "video": "../media/acadia-park-staff.mp4",
+      "time_seconds": 10.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            108,
+            1,
+            337,
+            480
+          ],
+          "proposal_score": 0.9429,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            416,
+            4,
+            665,
+            479
+          ],
+          "proposal_score": 0.9194,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            731,
+            181,
+            854,
+            474
+          ],
+          "proposal_score": 0.8101,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "acadia-park-staff-0130",
+      "video": "../media/acadia-park-staff.mp4",
+      "time_seconds": 13.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            413,
+            7,
+            853,
+            465
+          ],
+          "proposal_score": 0.6001,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "acadia-park-staff-0160",
+      "video": "../media/acadia-park-staff.mp4",
+      "time_seconds": 16.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            427,
+            83,
+            854,
+            479
+          ],
+          "proposal_score": 0.875,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            0,
+            3,
+            331,
+            473
+          ],
+          "proposal_score": 0.5195,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "acadia-park-staff-0190",
+      "video": "../media/acadia-park-staff.mp4",
+      "time_seconds": 19.0,
+      "width": 854,
+      "height": 480,
+      "annotations": []
+    },
+    {
+      "id": "grand-canyon-guided-hike-1-0010",
+      "video": "../media/grand-canyon-guided-hike-1.mp4",
+      "time_seconds": 1.0,
+      "width": 854,
+      "height": 480,
+      "annotations": []
+    },
+    {
+      "id": "grand-canyon-guided-hike-1-0040",
+      "video": "../media/grand-canyon-guided-hike-1.mp4",
+      "time_seconds": 4.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            731,
+            185,
+            854,
+            476
+          ],
+          "proposal_score": 0.8677,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            457,
+            103,
+            594,
+            468
+          ],
+          "proposal_score": 0.7734,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            111,
+            2,
+            544,
+            476
+          ],
+          "proposal_score": 0.7261,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            727,
+            229,
+            822,
+            349
+          ],
+          "proposal_score": 0.604,
+          "proposal_class": "backpack"
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            132,
+            238,
+            370,
+            475
+          ],
+          "proposal_score": 0.1582,
+          "proposal_class": "backpack"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-1-0070",
+      "video": "../media/grand-canyon-guided-hike-1.mp4",
+      "time_seconds": 7.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            476,
+            181,
+            637,
+            473
+          ],
+          "proposal_score": 0.877,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            708,
+            159,
+            854,
+            474
+          ],
+          "proposal_score": 0.728,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            536,
+            329,
+            621,
+            475
+          ],
+          "proposal_score": 0.5869,
+          "proposal_class": "backpack"
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            708,
+            210,
+            780,
+            347
+          ],
+          "proposal_score": 0.2056,
+          "proposal_class": "backpack"
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            709,
+            208,
+            842,
+            351
+          ],
+          "proposal_score": 0.2031,
+          "proposal_class": "backpack"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-1-0100",
+      "video": "../media/grand-canyon-guided-hike-1.mp4",
+      "time_seconds": 10.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            0,
+            30,
+            291,
+            477
+          ],
+          "proposal_score": 0.9072,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            625,
+            185,
+            753,
+            474
+          ],
+          "proposal_score": 0.8784,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            522,
+            283,
+            706,
+            477
+          ],
+          "proposal_score": 0.8569,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            240,
+            60,
+            527,
+            475
+          ],
+          "proposal_score": 0.8325,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            498,
+            189,
+            594,
+            423
+          ],
+          "proposal_score": 0.752,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            267,
+            154,
+            420,
+            392
+          ],
+          "proposal_score": 0.6743,
+          "proposal_class": "backpack"
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            547,
+            388,
+            632,
+            479
+          ],
+          "proposal_score": 0.2227,
+          "proposal_class": "backpack"
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            625,
+            247,
+            711,
+            367
+          ],
+          "proposal_score": 0.1813,
+          "proposal_class": "backpack"
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            0,
+            200,
+            134,
+            475
+          ],
+          "proposal_score": 0.1666,
+          "proposal_class": "backpack"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-1-0130",
+      "video": "../media/grand-canyon-guided-hike-1.mp4",
+      "time_seconds": 13.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            251,
+            45,
+            515,
+            477
+          ],
+          "proposal_score": 0.915,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            435,
+            130,
+            538,
+            467
+          ],
+          "proposal_score": 0.8408,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            539,
+            135,
+            681,
+            474
+          ],
+          "proposal_score": 0.7158,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            534,
+            244,
+            626,
+            477
+          ],
+          "proposal_score": 0.6406,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            276,
+            190,
+            401,
+            433
+          ],
+          "proposal_score": 0.4922,
+          "proposal_class": "backpack"
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            557,
+            191,
+            651,
+            306
+          ],
+          "proposal_score": 0.2896,
+          "proposal_class": "backpack"
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            280,
+            291,
+            393,
+            427
+          ],
+          "proposal_score": 0.1531,
+          "proposal_class": "backpack"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-1-0160",
+      "video": "../media/grand-canyon-guided-hike-1.mp4",
+      "time_seconds": 16.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            400,
+            121,
+            585,
+            475
+          ],
+          "proposal_score": 0.915,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            556,
+            191,
+            703,
+            477
+          ],
+          "proposal_score": 0.8828,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            707,
+            191,
+            854,
+            478
+          ],
+          "proposal_score": 0.8472,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            694,
+            232,
+            796,
+            354
+          ],
+          "proposal_score": 0.6743,
+          "proposal_class": "backpack"
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            414,
+            195,
+            510,
+            357
+          ],
+          "proposal_score": 0.4531,
+          "proposal_class": "backpack"
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            558,
+            246,
+            636,
+            366
+          ],
+          "proposal_score": 0.2554,
+          "proposal_class": "backpack"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-1-0190",
+      "video": "../media/grand-canyon-guided-hike-1.mp4",
+      "time_seconds": 19.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            465,
+            232,
+            482,
+            276
+          ],
+          "proposal_score": 0.5757,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            238,
+            319,
+            276,
+            376
+          ],
+          "proposal_score": 0.5522,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            123,
+            175,
+            147,
+            211
+          ],
+          "proposal_score": 0.5176,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-1-0220",
+      "video": "../media/grand-canyon-guided-hike-1.mp4",
+      "time_seconds": 22.0,
+      "width": 854,
+      "height": 480,
+      "annotations": []
+    },
+    {
+      "id": "grand-canyon-guided-hike-1-0250",
+      "video": "../media/grand-canyon-guided-hike-1.mp4",
+      "time_seconds": 25.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            457,
+            224,
+            477,
+            267
+          ],
+          "proposal_score": 0.6206,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            350,
+            176,
+            368,
+            208
+          ],
+          "proposal_score": 0.5195,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-1-0280",
+      "video": "../media/grand-canyon-guided-hike-1.mp4",
+      "time_seconds": 28.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            163,
+            162,
+            183,
+            207
+          ],
+          "proposal_score": 0.6187,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            556,
+            225,
+            577,
+            266
+          ],
+          "proposal_score": 0.5791,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            182,
+            310,
+            202,
+            356
+          ],
+          "proposal_score": 0.5601,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            627,
+            234,
+            651,
+            263
+          ],
+          "proposal_score": 0.5542,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-1-0310",
+      "video": "../media/grand-canyon-guided-hike-1.mp4",
+      "time_seconds": 31.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            822,
+            235,
+            853,
+            306
+          ],
+          "proposal_score": 0.7676,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            458,
+            282,
+            489,
+            343
+          ],
+          "proposal_score": 0.7637,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            526,
+            266,
+            569,
+            341
+          ],
+          "proposal_score": 0.6548,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            129,
+            107,
+            160,
+            140
+          ],
+          "proposal_score": 0.5254,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            531,
+            87,
+            555,
+            121
+          ],
+          "proposal_score": 0.5156,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-1-0340",
+      "video": "../media/grand-canyon-guided-hike-1.mp4",
+      "time_seconds": 34.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            320,
+            282,
+            354,
+            367
+          ],
+          "proposal_score": 0.751,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            284,
+            98,
+            313,
+            147
+          ],
+          "proposal_score": 0.606,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            396,
+            115,
+            415,
+            138
+          ],
+          "proposal_score": 0.5234,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-1-0370",
+      "video": "../media/grand-canyon-guided-hike-1.mp4",
+      "time_seconds": 37.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            242,
+            280,
+            285,
+            390
+          ],
+          "proposal_score": 0.8442,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            798,
+            241,
+            838,
+            309
+          ],
+          "proposal_score": 0.7021,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            342,
+            174,
+            361,
+            213
+          ],
+          "proposal_score": 0.6875,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            606,
+            267,
+            640,
+            336
+          ],
+          "proposal_score": 0.6772,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            272,
+            293,
+            304,
+            385
+          ],
+          "proposal_score": 0.6587,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            292,
+            113,
+            308,
+            145
+          ],
+          "proposal_score": 0.606,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            326,
+            277,
+            362,
+            370
+          ],
+          "proposal_score": 0.585,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            319,
+            104,
+            345,
+            145
+          ],
+          "proposal_score": 0.562,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            187,
+            101,
+            212,
+            151
+          ],
+          "proposal_score": 0.562,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            523,
+            90,
+            546,
+            121
+          ],
+          "proposal_score": 0.5195,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-1-0400",
+      "video": "../media/grand-canyon-guided-hike-1.mp4",
+      "time_seconds": 40.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            184,
+            283,
+            231,
+            406
+          ],
+          "proposal_score": 0.8296,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            252,
+            287,
+            295,
+            386
+          ],
+          "proposal_score": 0.7866,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            223,
+            308,
+            252,
+            398
+          ],
+          "proposal_score": 0.6528,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            429,
+            197,
+            452,
+            233
+          ],
+          "proposal_score": 0.5791,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            459,
+            282,
+            490,
+            344
+          ],
+          "proposal_score": 0.564,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-1-0430",
+      "video": "../media/grand-canyon-guided-hike-1.mp4",
+      "time_seconds": 43.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            215,
+            290,
+            266,
+            407
+          ],
+          "proposal_score": 0.8677,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            158,
+            279,
+            219,
+            423
+          ],
+          "proposal_score": 0.7866,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-1-0460",
+      "video": "../media/grand-canyon-guided-hike-1.mp4",
+      "time_seconds": 46.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            276,
+            287,
+            311,
+            384
+          ],
+          "proposal_score": 0.8442,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            174,
+            281,
+            232,
+            432
+          ],
+          "proposal_score": 0.8398,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            77,
+            266,
+            146,
+            446
+          ],
+          "proposal_score": 0.8257,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            244,
+            281,
+            279,
+            384
+          ],
+          "proposal_score": 0.7759,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            126,
+            301,
+            172,
+            432
+          ],
+          "proposal_score": 0.5195,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-1-0490",
+      "video": "../media/grand-canyon-guided-hike-1.mp4",
+      "time_seconds": 49.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            127,
+            257,
+            199,
+            449
+          ],
+          "proposal_score": 0.8872,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            294,
+            275,
+            341,
+            378
+          ],
+          "proposal_score": 0.8247,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            187,
+            287,
+            228,
+            405
+          ],
+          "proposal_score": 0.8232,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            0,
+            259,
+            94,
+            468
+          ],
+          "proposal_score": 0.8125,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            73,
+            315,
+            128,
+            448
+          ],
+          "proposal_score": 0.8008,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            772,
+            256,
+            805,
+            313
+          ],
+          "proposal_score": 0.7983,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            227,
+            297,
+            268,
+            396
+          ],
+          "proposal_score": 0.7666,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            420,
+            191,
+            448,
+            239
+          ],
+          "proposal_score": 0.7534,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            627,
+            239,
+            656,
+            292
+          ],
+          "proposal_score": 0.6689,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-1-0520",
+      "video": "../media/grand-canyon-guided-hike-1.mp4",
+      "time_seconds": 52.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            58,
+            251,
+            160,
+            469
+          ],
+          "proposal_score": 0.896,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            1,
+            315,
+            68,
+            477
+          ],
+          "proposal_score": 0.8716,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            245,
+            283,
+            292,
+            394
+          ],
+          "proposal_score": 0.8115,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            200,
+            297,
+            245,
+            420
+          ],
+          "proposal_score": 0.7891,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            766,
+            253,
+            798,
+            311
+          ],
+          "proposal_score": 0.7769,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            517,
+            210,
+            552,
+            267
+          ],
+          "proposal_score": 0.6094,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-1-0550",
+      "video": "../media/grand-canyon-guided-hike-1.mp4",
+      "time_seconds": 55.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            0,
+            241,
+            86,
+            477
+          ],
+          "proposal_score": 0.9136,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            166,
+            288,
+            222,
+            432
+          ],
+          "proposal_score": 0.8535,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            221,
+            277,
+            272,
+            397
+          ],
+          "proposal_score": 0.8325,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            84,
+            267,
+            155,
+            432
+          ],
+          "proposal_score": 0.6113,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            0,
+            292,
+            66,
+            371
+          ],
+          "proposal_score": 0.1208,
+          "proposal_class": "backpack"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-1-0580",
+      "video": "../media/grand-canyon-guided-hike-1.mp4",
+      "time_seconds": 58.0,
+      "width": 854,
+      "height": 480,
+      "annotations": []
+    },
+    {
+      "id": "grand-canyon-guided-hike-1-0610",
+      "video": "../media/grand-canyon-guided-hike-1.mp4",
+      "time_seconds": 61.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            180,
+            18,
+            385,
+            475
+          ],
+          "proposal_score": 0.876,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            131,
+            157,
+            211,
+            364
+          ],
+          "proposal_score": 0.2673,
+          "proposal_class": "backpack"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-1-0640",
+      "video": "../media/grand-canyon-guided-hike-1.mp4",
+      "time_seconds": 64.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            390,
+            236,
+            559,
+            476
+          ],
+          "proposal_score": 0.8784,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            78,
+            67,
+            262,
+            443
+          ],
+          "proposal_score": 0.8599,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            2,
+            131,
+            113,
+            360
+          ],
+          "proposal_score": 0.4148,
+          "proposal_class": "backpack"
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            389,
+            325,
+            471,
+            450
+          ],
+          "proposal_score": 0.2268,
+          "proposal_class": "backpack"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-1-0670",
+      "video": "../media/grand-canyon-guided-hike-1.mp4",
+      "time_seconds": 67.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            0,
+            41,
+            131,
+            393
+          ],
+          "proposal_score": 0.8213,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            281,
+            91,
+            467,
+            477
+          ],
+          "proposal_score": 0.686,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            229,
+            205,
+            299,
+            363
+          ],
+          "proposal_score": 0.2031,
+          "proposal_class": "backpack"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-1-0700",
+      "video": "../media/grand-canyon-guided-hike-1.mp4",
+      "time_seconds": 70.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            0,
+            41,
+            147,
+            416
+          ],
+          "proposal_score": 0.9463,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            493,
+            91,
+            675,
+            474
+          ],
+          "proposal_score": 0.6313,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            420,
+            180,
+            552,
+            398
+          ],
+          "proposal_score": 0.4707,
+          "proposal_class": "backpack"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-1-0730",
+      "video": "../media/grand-canyon-guided-hike-1.mp4",
+      "time_seconds": 73.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            565,
+            154,
+            852,
+            474
+          ],
+          "proposal_score": 0.8496,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-1-0760",
+      "video": "../media/grand-canyon-guided-hike-1.mp4",
+      "time_seconds": 76.0,
+      "width": 854,
+      "height": 480,
+      "annotations": []
+    },
+    {
+      "id": "grand-canyon-guided-hike-1-0790",
+      "video": "../media/grand-canyon-guided-hike-1.mp4",
+      "time_seconds": 79.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            0,
+            1,
+            180,
+            270
+          ],
+          "proposal_score": 0.9395,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-1-0820",
+      "video": "../media/grand-canyon-guided-hike-1.mp4",
+      "time_seconds": 82.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            0,
+            1,
+            91,
+            265
+          ],
+          "proposal_score": 0.6304,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-1-0850",
+      "video": "../media/grand-canyon-guided-hike-1.mp4",
+      "time_seconds": 85.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            44,
+            1,
+            181,
+            266
+          ],
+          "proposal_score": 0.8633,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-1-0880",
+      "video": "../media/grand-canyon-guided-hike-1.mp4",
+      "time_seconds": 88.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            257,
+            1,
+            546,
+            396
+          ],
+          "proposal_score": 0.8218,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-1-0910",
+      "video": "../media/grand-canyon-guided-hike-1.mp4",
+      "time_seconds": 91.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            183,
+            0,
+            620,
+            409
+          ],
+          "proposal_score": 0.9072,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            0,
+            1,
+            120,
+            271
+          ],
+          "proposal_score": 0.667,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-1-0940",
+      "video": "../media/grand-canyon-guided-hike-1.mp4",
+      "time_seconds": 94.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            59,
+            0,
+            336,
+            320
+          ],
+          "proposal_score": 0.937,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            588,
+            1,
+            854,
+            471
+          ],
+          "proposal_score": 0.8389,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-1-0970",
+      "video": "../media/grand-canyon-guided-hike-1.mp4",
+      "time_seconds": 97.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            134,
+            1,
+            308,
+            328
+          ],
+          "proposal_score": 0.8804,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-1-1000",
+      "video": "../media/grand-canyon-guided-hike-1.mp4",
+      "time_seconds": 100.0,
+      "width": 854,
+      "height": 480,
+      "annotations": []
+    },
+    {
+      "id": "grand-canyon-guided-hike-2-0010",
+      "video": "../media/grand-canyon-guided-hike-2.mp4",
+      "time_seconds": 1.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            768,
+            1,
+            854,
+            305
+          ],
+          "proposal_score": 0.8276,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            537,
+            1,
+            651,
+            291
+          ],
+          "proposal_score": 0.6992,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            316,
+            1,
+            528,
+            309
+          ],
+          "proposal_score": 0.5469,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            655,
+            1,
+            760,
+            301
+          ],
+          "proposal_score": 0.5391,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-2-0040",
+      "video": "../media/grand-canyon-guided-hike-2.mp4",
+      "time_seconds": 4.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            381,
+            1,
+            643,
+            450
+          ],
+          "proposal_score": 0.8735,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            665,
+            3,
+            854,
+            474
+          ],
+          "proposal_score": 0.8018,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-2-0070",
+      "video": "../media/grand-canyon-guided-hike-2.mp4",
+      "time_seconds": 7.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            464,
+            1,
+            543,
+            276
+          ],
+          "proposal_score": 0.5728,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            675,
+            4,
+            854,
+            474
+          ],
+          "proposal_score": 0.5488,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            531,
+            1,
+            636,
+            288
+          ],
+          "proposal_score": 0.5195,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-2-0100",
+      "video": "../media/grand-canyon-guided-hike-2.mp4",
+      "time_seconds": 10.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            640,
+            1,
+            853,
+            377
+          ],
+          "proposal_score": 0.6792,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            334,
+            0,
+            522,
+            266
+          ],
+          "proposal_score": 0.5786,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-2-0130",
+      "video": "../media/grand-canyon-guided-hike-2.mp4",
+      "time_seconds": 13.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            717,
+            0,
+            854,
+            477
+          ],
+          "proposal_score": 0.7339,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            514,
+            1,
+            664,
+            339
+          ],
+          "proposal_score": 0.6479,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            212,
+            0,
+            362,
+            163
+          ],
+          "proposal_score": 0.6196,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-2-0160",
+      "video": "../media/grand-canyon-guided-hike-2.mp4",
+      "time_seconds": 16.0,
+      "width": 854,
+      "height": 480,
+      "annotations": []
+    },
+    {
+      "id": "grand-canyon-guided-hike-2-0190",
+      "video": "../media/grand-canyon-guided-hike-2.mp4",
+      "time_seconds": 19.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            365,
+            90,
+            519,
+            343
+          ],
+          "proposal_score": 0.895,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            638,
+            1,
+            823,
+            325
+          ],
+          "proposal_score": 0.8804,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            1,
+            79,
+            154,
+            353
+          ],
+          "proposal_score": 0.8687,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            1,
+            153,
+            56,
+            288
+          ],
+          "proposal_score": 0.2281,
+          "proposal_class": "backpack"
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            3,
+            130,
+            104,
+            242
+          ],
+          "proposal_score": 0.1394,
+          "proposal_class": "backpack"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-2-0220",
+      "video": "../media/grand-canyon-guided-hike-2.mp4",
+      "time_seconds": 22.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            626,
+            10,
+            800,
+            343
+          ],
+          "proposal_score": 0.9194,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            517,
+            137,
+            626,
+            348
+          ],
+          "proposal_score": 0.8843,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            182,
+            85,
+            357,
+            352
+          ],
+          "proposal_score": 0.877,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            148,
+            78,
+            248,
+            345
+          ],
+          "proposal_score": 0.7969,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-2-0250",
+      "video": "../media/grand-canyon-guided-hike-2.mp4",
+      "time_seconds": 25.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            174,
+            83,
+            297,
+            357
+          ],
+          "proposal_score": 0.8071,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            241,
+            30,
+            383,
+            351
+          ],
+          "proposal_score": 0.7666,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-2-0280",
+      "video": "../media/grand-canyon-guided-hike-2.mp4",
+      "time_seconds": 28.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            133,
+            21,
+            605,
+            474
+          ],
+          "proposal_score": 0.8936,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-2-0310",
+      "video": "../media/grand-canyon-guided-hike-2.mp4",
+      "time_seconds": 31.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            54,
+            34,
+            319,
+            477
+          ],
+          "proposal_score": 0.9336,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            567,
+            121,
+            795,
+            477
+          ],
+          "proposal_score": 0.8887,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            688,
+            228,
+            794,
+            437
+          ],
+          "proposal_score": 0.1089,
+          "proposal_class": "backpack"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-2-0340",
+      "video": "../media/grand-canyon-guided-hike-2.mp4",
+      "time_seconds": 34.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            126,
+            49,
+            413,
+            476
+          ],
+          "proposal_score": 0.9233,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            352,
+            21,
+            667,
+            478
+          ],
+          "proposal_score": 0.7788,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-2-0370",
+      "video": "../media/grand-canyon-guided-hike-2.mp4",
+      "time_seconds": 37.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            132,
+            46,
+            372,
+            475
+          ],
+          "proposal_score": 0.9404,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-2-0400",
+      "video": "../media/grand-canyon-guided-hike-2.mp4",
+      "time_seconds": 40.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            150,
+            38,
+            466,
+            477
+          ],
+          "proposal_score": 0.876,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-2-0430",
+      "video": "../media/grand-canyon-guided-hike-2.mp4",
+      "time_seconds": 43.0,
+      "width": 854,
+      "height": 480,
+      "annotations": []
+    },
+    {
+      "id": "grand-canyon-guided-hike-2-0460",
+      "video": "../media/grand-canyon-guided-hike-2.mp4",
+      "time_seconds": 46.0,
+      "width": 854,
+      "height": 480,
+      "annotations": []
+    },
+    {
+      "id": "grand-canyon-guided-hike-2-0490",
+      "video": "../media/grand-canyon-guided-hike-2.mp4",
+      "time_seconds": 49.0,
+      "width": 854,
+      "height": 480,
+      "annotations": []
+    },
+    {
+      "id": "grand-canyon-guided-hike-2-0520",
+      "video": "../media/grand-canyon-guided-hike-2.mp4",
+      "time_seconds": 52.0,
+      "width": 854,
+      "height": 480,
+      "annotations": []
+    },
+    {
+      "id": "grand-canyon-guided-hike-2-0550",
+      "video": "../media/grand-canyon-guided-hike-2.mp4",
+      "time_seconds": 55.0,
+      "width": 854,
+      "height": 480,
+      "annotations": []
+    },
+    {
+      "id": "grand-canyon-guided-hike-2-0580",
+      "video": "../media/grand-canyon-guided-hike-2.mp4",
+      "time_seconds": 58.0,
+      "width": 854,
+      "height": 480,
+      "annotations": []
+    },
+    {
+      "id": "grand-canyon-guided-hike-2-0610",
+      "video": "../media/grand-canyon-guided-hike-2.mp4",
+      "time_seconds": 61.0,
+      "width": 854,
+      "height": 480,
+      "annotations": []
+    },
+    {
+      "id": "grand-canyon-guided-hike-2-0640",
+      "video": "../media/grand-canyon-guided-hike-2.mp4",
+      "time_seconds": 64.0,
+      "width": 854,
+      "height": 480,
+      "annotations": []
+    },
+    {
+      "id": "grand-canyon-guided-hike-2-0670",
+      "video": "../media/grand-canyon-guided-hike-2.mp4",
+      "time_seconds": 67.0,
+      "width": 854,
+      "height": 480,
+      "annotations": []
+    },
+    {
+      "id": "grand-canyon-guided-hike-2-0700",
+      "video": "../media/grand-canyon-guided-hike-2.mp4",
+      "time_seconds": 70.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            240,
+            103,
+            358,
+            371
+          ],
+          "proposal_score": 0.8945,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            574,
+            375,
+            671,
+            479
+          ],
+          "proposal_score": 0.8389,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            624,
+            149,
+            756,
+            374
+          ],
+          "proposal_score": 0.7446,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            318,
+            148,
+            359,
+            236
+          ],
+          "proposal_score": 0.2554,
+          "proposal_class": "backpack"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-2-0730",
+      "video": "../media/grand-canyon-guided-hike-2.mp4",
+      "time_seconds": 73.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            266,
+            114,
+            379,
+            343
+          ],
+          "proposal_score": 0.8535,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            0,
+            318,
+            49,
+            479
+          ],
+          "proposal_score": 0.8081,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            556,
+            105,
+            656,
+            360
+          ],
+          "proposal_score": 0.7769,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            329,
+            151,
+            381,
+            240
+          ],
+          "proposal_score": 0.4038,
+          "proposal_class": "backpack"
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            614,
+            147,
+            658,
+            234
+          ],
+          "proposal_score": 0.1571,
+          "proposal_class": "backpack"
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            348,
+            158,
+            380,
+            241
+          ],
+          "proposal_score": 0.126,
+          "proposal_class": "backpack"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-2-0760",
+      "video": "../media/grand-canyon-guided-hike-2.mp4",
+      "time_seconds": 76.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            490,
+            94,
+            607,
+            321
+          ],
+          "proposal_score": 0.814,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            8,
+            293,
+            120,
+            478
+          ],
+          "proposal_score": 0.7295,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            517,
+            261,
+            657,
+            468
+          ],
+          "proposal_score": 0.7261,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            160,
+            175,
+            321,
+            428
+          ],
+          "proposal_score": 0.5591,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            563,
+            403,
+            643,
+            479
+          ],
+          "proposal_score": 0.1777,
+          "proposal_class": "backpack"
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            44,
+            343,
+            102,
+            409
+          ],
+          "proposal_score": 0.149,
+          "proposal_class": "backpack"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-2-0790",
+      "video": "../media/grand-canyon-guided-hike-2.mp4",
+      "time_seconds": 79.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            307,
+            144,
+            399,
+            398
+          ],
+          "proposal_score": 0.8721,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            138,
+            213,
+            248,
+            468
+          ],
+          "proposal_score": 0.7466,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            546,
+            225,
+            673,
+            474
+          ],
+          "proposal_score": 0.7246,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            518,
+            162,
+            637,
+            408
+          ],
+          "proposal_score": 0.5591,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            593,
+            220,
+            666,
+            300
+          ],
+          "proposal_score": 0.116,
+          "proposal_class": "backpack"
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            644,
+            219,
+            730,
+            357
+          ],
+          "proposal_score": 0.1082,
+          "proposal_class": "backpack"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-2-0820",
+      "video": "../media/grand-canyon-guided-hike-2.mp4",
+      "time_seconds": 82.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            304,
+            182,
+            344,
+            313
+          ],
+          "proposal_score": 0.8057,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            341,
+            191,
+            370,
+            277
+          ],
+          "proposal_score": 0.5757,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-2-0850",
+      "video": "../media/grand-canyon-guided-hike-2.mp4",
+      "time_seconds": 85.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            239,
+            87,
+            376,
+            449
+          ],
+          "proposal_score": 0.9048,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-2-0880",
+      "video": "../media/grand-canyon-guided-hike-2.mp4",
+      "time_seconds": 88.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            96,
+            160,
+            211,
+            389
+          ],
+          "proposal_score": 0.9165,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            248,
+            185,
+            346,
+            465
+          ],
+          "proposal_score": 0.8867,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            525,
+            1,
+            754,
+            474
+          ],
+          "proposal_score": 0.8574,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            486,
+            95,
+            550,
+            249
+          ],
+          "proposal_score": 0.1582,
+          "proposal_class": "backpack"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-2-0910",
+      "video": "../media/grand-canyon-guided-hike-2.mp4",
+      "time_seconds": 91.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            282,
+            26,
+            443,
+            479
+          ],
+          "proposal_score": 0.9375,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            116,
+            77,
+            274,
+            463
+          ],
+          "proposal_score": 0.9194,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            768,
+            196,
+            854,
+            477
+          ],
+          "proposal_score": 0.7119,
+          "proposal_class": "person"
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-guided-hike-2-0940",
+      "video": "../media/grand-canyon-guided-hike-2.mp4",
+      "time_seconds": 94.0,
+      "width": 854,
+      "height": 480,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            252,
+            164,
+            327,
+            337
+          ],
+          "proposal_score": 0.9028,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            656,
+            119,
+            779,
+            474
+          ],
+          "proposal_score": 0.7358,
+          "proposal_class": "person"
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            319,
+            180,
+            358,
+            299
+          ],
+          "proposal_score": 0.646,
+          "proposal_class": "person"
+        }
+      ]
+    }
+  ]
+}

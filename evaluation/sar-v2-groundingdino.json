@@ -1,0 +1,182 @@
+{
+  "description": "Higher-capacity vision model availability test for the 84-frame SAR sample set. This file preserves one independent Grounding DINO Base result and records why the full batch was not produced.",
+  "status": "INCOMPLETE_EXTERNAL_QUOTA_AND_LOCAL_THROUGHPUT",
+  "evaluation_ready": false,
+  "models_tried": [
+    {
+      "name": "NVIDIA LocateAnything-3B hosted demo",
+      "status": "blocked",
+      "detail": "ZeroGPU endpoint rejected its 240-second requested GPU duration as exceeding the service maximum."
+    },
+    {
+      "name": "Grounding DINO Base hosted demo",
+      "status": "one_frame_success_then_errors",
+      "detail": "The first inference returned boxes; subsequent batch calls returned event:error with null data. No Hugging Face credentials were configured."
+    },
+    {
+      "name": "NVIDIA LocateAnything-3B C++ Q4_K local port",
+      "status": "single_frame_cpu_test",
+      "detail": "Built for aarch64 and loaded a 4.716 GB Q4_K model from /dev/shm. With the playback pipeline paused, one image took about three minutes. Fast mode returned five person boxes, including a duplicate, and no backpacks.",
+      "license_note": "NVIDIA LocateAnything-3B model weights are restricted to non-commercial/research use by the NVIDIA model license."
+    }
+  ],
+  "images": [
+    {
+      "id": "grand-canyon-guided-hike-2-190",
+      "video": "../media/grand-canyon-guided-hike-2.mp4",
+      "time_seconds": 19.0,
+      "width": 854,
+      "height": 480,
+      "model": "Grounding DINO Base hosted demo",
+      "status": "single_successful_inference",
+      "annotations": [
+        {
+          "label": "person",
+          "score": 0.593,
+          "bbox": [
+            365,
+            91,
+            515,
+            342
+          ]
+        },
+        {
+          "label": "person",
+          "score": 0.595,
+          "bbox": [
+            651,
+            0,
+            823,
+            323
+          ]
+        },
+        {
+          "label": "person",
+          "score": 0.615,
+          "bbox": [
+            23,
+            79,
+            163,
+            356
+          ]
+        },
+        {
+          "label": "person",
+          "score": 0.607,
+          "bbox": [
+            608,
+            142,
+            714,
+            334
+          ]
+        },
+        {
+          "label": "backpack",
+          "score": 0.342,
+          "bbox": [
+            704,
+            46,
+            829,
+            199
+          ]
+        },
+        {
+          "label": "backpack",
+          "score": 0.485,
+          "bbox": [
+            1,
+            135,
+            106,
+            303
+          ]
+        },
+        {
+          "label": "handbag",
+          "score": 0.287,
+          "bbox": [
+            803,
+            134,
+            829,
+            200
+          ]
+        },
+        {
+          "label": "backpack handbag",
+          "score": 0.252,
+          "bbox": [
+            498,
+            226,
+            523,
+            338
+          ]
+        },
+        {
+          "label": "backpack",
+          "score": 0.265,
+          "bbox": [
+            1,
+            135,
+            105,
+            247
+          ]
+        }
+      ]
+    }
+  ],
+  "note": "These are machine proposals, not exhaustive ground truth. The result has duplicate/ambiguous boxes and must not be scored as a validated frame.",
+  "local_locateanything_trial": {
+    "id": "grand-canyon-guided-hike-2-190",
+    "time_seconds": 19.0,
+    "mode": "fast",
+    "threads": 6,
+    "elapsed_seconds_approx": 180,
+    "annotations": [
+      {
+        "label": "person",
+        "bbox": [
+          23.06,
+          79.2,
+          162.26,
+          354.24
+        ]
+      },
+      {
+        "label": "person",
+        "bbox": [
+          364.66,
+          92.64,
+          514.96,
+          341.76
+        ]
+      },
+      {
+        "label": "person",
+        "bbox": [
+          608.9,
+          142.56,
+          713.94,
+          334.08
+        ]
+      },
+      {
+        "label": "person",
+        "bbox": [
+          651.6,
+          0.0,
+          820.69,
+          324.0
+        ]
+      },
+      {
+        "label": "person",
+        "bbox": [
+          692.59,
+          0.0,
+          853.15,
+          479.04
+        ]
+      }
+    ],
+    "note": "One duplicate person box at the right edge; no backpack boxes. This does not replace or validate the ground-truth labels."
+  }
+}

@@ -1,0 +1,2662 @@
+{
+  "iou_threshold": 0.5,
+  "image_count": 3,
+  "confidence_sweep": [
+    0.6,
+    0.55,
+    0.5,
+    0.45,
+    0.4
+  ],
+  "class_profiles": {
+    "global": {},
+    "pack30": {
+      "24": 0.3
+    },
+    "pack20": {
+      "24": 0.2
+    },
+    "pack10": {
+      "24": 0.1
+    }
+  },
+  "live_60_fps_gate": "not measured by this detector-only harness; verify with the live dashboard",
+  "settings": [
+    {
+      "engine": "768n",
+      "engine_path": "models/yolo26n_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.6,
+      "class_profile": "global",
+      "class_thresholds": {},
+      "metrics": {
+        "0": {
+          "tp": 8,
+          "fp": 2,
+          "fn": 5,
+          "precision": 0.8,
+          "recall": 0.6153846153846154
+        },
+        "24": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 3,
+          "precision": null,
+          "recall": 0.0
+        },
+        "overall": {
+          "tp": 8,
+          "fp": 2,
+          "fn": 8,
+          "precision": 0.8,
+          "recall": 0.5
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 8,
+          "fp": 2,
+          "fn": 5,
+          "precision": 0.8,
+          "recall": 0.6153846153846154
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 3,
+          "precision": null,
+          "recall": 0.0
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 48.14,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": 0.0,
+      "within_five_point_precision_budget": true
+    },
+    {
+      "engine": "768n",
+      "engine_path": "models/yolo26n_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.55,
+      "class_profile": "global",
+      "class_thresholds": {},
+      "metrics": {
+        "0": {
+          "tp": 8,
+          "fp": 2,
+          "fn": 5,
+          "precision": 0.8,
+          "recall": 0.6153846153846154
+        },
+        "24": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 3,
+          "precision": null,
+          "recall": 0.0
+        },
+        "overall": {
+          "tp": 8,
+          "fp": 2,
+          "fn": 8,
+          "precision": 0.8,
+          "recall": 0.5
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 8,
+          "fp": 2,
+          "fn": 5,
+          "precision": 0.8,
+          "recall": 0.6153846153846154
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 3,
+          "precision": null,
+          "recall": 0.0
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 41.05,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": 0.0,
+      "within_five_point_precision_budget": true
+    },
+    {
+      "engine": "768n",
+      "engine_path": "models/yolo26n_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.5,
+      "class_profile": "global",
+      "class_thresholds": {},
+      "metrics": {
+        "0": {
+          "tp": 8,
+          "fp": 2,
+          "fn": 5,
+          "precision": 0.8,
+          "recall": 0.6153846153846154
+        },
+        "24": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 3,
+          "precision": null,
+          "recall": 0.0
+        },
+        "overall": {
+          "tp": 8,
+          "fp": 2,
+          "fn": 8,
+          "precision": 0.8,
+          "recall": 0.5
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 8,
+          "fp": 2,
+          "fn": 5,
+          "precision": 0.8,
+          "recall": 0.6153846153846154
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 3,
+          "precision": null,
+          "recall": 0.0
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 35.88,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": 0.0,
+      "within_five_point_precision_budget": true
+    },
+    {
+      "engine": "768n",
+      "engine_path": "models/yolo26n_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.45,
+      "class_profile": "global",
+      "class_thresholds": {},
+      "metrics": {
+        "0": {
+          "tp": 8,
+          "fp": 3,
+          "fn": 5,
+          "precision": 0.7272727272727273,
+          "recall": 0.6153846153846154
+        },
+        "24": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 3,
+          "precision": null,
+          "recall": 0.0
+        },
+        "overall": {
+          "tp": 8,
+          "fp": 3,
+          "fn": 8,
+          "precision": 0.7272727272727273,
+          "recall": 0.5
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 8,
+          "fp": 3,
+          "fn": 5,
+          "precision": 0.7272727272727273,
+          "recall": 0.6153846153846154
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 3,
+          "precision": null,
+          "recall": 0.0
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 27.51,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": 7.27,
+      "within_five_point_precision_budget": false
+    },
+    {
+      "engine": "768n",
+      "engine_path": "models/yolo26n_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.4,
+      "class_profile": "global",
+      "class_thresholds": {},
+      "metrics": {
+        "0": {
+          "tp": 8,
+          "fp": 3,
+          "fn": 5,
+          "precision": 0.7272727272727273,
+          "recall": 0.6153846153846154
+        },
+        "24": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 2,
+          "precision": 1.0,
+          "recall": 0.3333333333333333
+        },
+        "overall": {
+          "tp": 9,
+          "fp": 3,
+          "fn": 7,
+          "precision": 0.75,
+          "recall": 0.5625
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 8,
+          "fp": 3,
+          "fn": 5,
+          "precision": 0.7272727272727273,
+          "recall": 0.6153846153846154
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 2,
+          "precision": 1.0,
+          "recall": 0.3333333333333333
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 27.72,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": 5.0,
+      "within_five_point_precision_budget": true
+    },
+    {
+      "engine": "768n",
+      "engine_path": "models/yolo26n_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.6,
+      "class_profile": "pack30",
+      "class_thresholds": {
+        "24": 0.3
+      },
+      "metrics": {
+        "0": {
+          "tp": 8,
+          "fp": 2,
+          "fn": 5,
+          "precision": 0.8,
+          "recall": 0.6153846153846154
+        },
+        "24": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.6666666666666666
+        },
+        "overall": {
+          "tp": 10,
+          "fp": 2,
+          "fn": 6,
+          "precision": 0.8333333333333334,
+          "recall": 0.625
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 8,
+          "fp": 2,
+          "fn": 5,
+          "precision": 0.8,
+          "recall": 0.6153846153846154
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.6666666666666666
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 27.61,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": -3.33,
+      "within_five_point_precision_budget": true
+    },
+    {
+      "engine": "768n",
+      "engine_path": "models/yolo26n_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.55,
+      "class_profile": "pack30",
+      "class_thresholds": {
+        "24": 0.3
+      },
+      "metrics": {
+        "0": {
+          "tp": 8,
+          "fp": 2,
+          "fn": 5,
+          "precision": 0.8,
+          "recall": 0.6153846153846154
+        },
+        "24": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.6666666666666666
+        },
+        "overall": {
+          "tp": 10,
+          "fp": 2,
+          "fn": 6,
+          "precision": 0.8333333333333334,
+          "recall": 0.625
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 8,
+          "fp": 2,
+          "fn": 5,
+          "precision": 0.8,
+          "recall": 0.6153846153846154
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.6666666666666666
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 28.26,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": -3.33,
+      "within_five_point_precision_budget": true
+    },
+    {
+      "engine": "768n",
+      "engine_path": "models/yolo26n_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.5,
+      "class_profile": "pack30",
+      "class_thresholds": {
+        "24": 0.3
+      },
+      "metrics": {
+        "0": {
+          "tp": 8,
+          "fp": 2,
+          "fn": 5,
+          "precision": 0.8,
+          "recall": 0.6153846153846154
+        },
+        "24": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.6666666666666666
+        },
+        "overall": {
+          "tp": 10,
+          "fp": 2,
+          "fn": 6,
+          "precision": 0.8333333333333334,
+          "recall": 0.625
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 8,
+          "fp": 2,
+          "fn": 5,
+          "precision": 0.8,
+          "recall": 0.6153846153846154
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.6666666666666666
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 23.96,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": -3.33,
+      "within_five_point_precision_budget": true
+    },
+    {
+      "engine": "768n",
+      "engine_path": "models/yolo26n_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.45,
+      "class_profile": "pack30",
+      "class_thresholds": {
+        "24": 0.3
+      },
+      "metrics": {
+        "0": {
+          "tp": 8,
+          "fp": 3,
+          "fn": 5,
+          "precision": 0.7272727272727273,
+          "recall": 0.6153846153846154
+        },
+        "24": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.6666666666666666
+        },
+        "overall": {
+          "tp": 10,
+          "fp": 3,
+          "fn": 6,
+          "precision": 0.7692307692307693,
+          "recall": 0.625
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 8,
+          "fp": 3,
+          "fn": 5,
+          "precision": 0.7272727272727273,
+          "recall": 0.6153846153846154
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.6666666666666666
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 24.57,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": 3.08,
+      "within_five_point_precision_budget": true
+    },
+    {
+      "engine": "768n",
+      "engine_path": "models/yolo26n_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.4,
+      "class_profile": "pack30",
+      "class_thresholds": {
+        "24": 0.3
+      },
+      "metrics": {
+        "0": {
+          "tp": 8,
+          "fp": 3,
+          "fn": 5,
+          "precision": 0.7272727272727273,
+          "recall": 0.6153846153846154
+        },
+        "24": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.6666666666666666
+        },
+        "overall": {
+          "tp": 10,
+          "fp": 3,
+          "fn": 6,
+          "precision": 0.7692307692307693,
+          "recall": 0.625
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 8,
+          "fp": 3,
+          "fn": 5,
+          "precision": 0.7272727272727273,
+          "recall": 0.6153846153846154
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.6666666666666666
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 24.07,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": 3.08,
+      "within_five_point_precision_budget": true
+    },
+    {
+      "engine": "768n",
+      "engine_path": "models/yolo26n_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.6,
+      "class_profile": "pack20",
+      "class_thresholds": {
+        "24": 0.2
+      },
+      "metrics": {
+        "0": {
+          "tp": 8,
+          "fp": 2,
+          "fn": 5,
+          "precision": 0.8,
+          "recall": 0.6153846153846154
+        },
+        "24": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.6666666666666666
+        },
+        "overall": {
+          "tp": 10,
+          "fp": 2,
+          "fn": 6,
+          "precision": 0.8333333333333334,
+          "recall": 0.625
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 8,
+          "fp": 2,
+          "fn": 5,
+          "precision": 0.8,
+          "recall": 0.6153846153846154
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.6666666666666666
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 24.14,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": -3.33,
+      "within_five_point_precision_budget": true
+    },
+    {
+      "engine": "768n",
+      "engine_path": "models/yolo26n_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.55,
+      "class_profile": "pack20",
+      "class_thresholds": {
+        "24": 0.2
+      },
+      "metrics": {
+        "0": {
+          "tp": 8,
+          "fp": 2,
+          "fn": 5,
+          "precision": 0.8,
+          "recall": 0.6153846153846154
+        },
+        "24": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.6666666666666666
+        },
+        "overall": {
+          "tp": 10,
+          "fp": 2,
+          "fn": 6,
+          "precision": 0.8333333333333334,
+          "recall": 0.625
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 8,
+          "fp": 2,
+          "fn": 5,
+          "precision": 0.8,
+          "recall": 0.6153846153846154
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.6666666666666666
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 24.15,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": -3.33,
+      "within_five_point_precision_budget": true
+    },
+    {
+      "engine": "768n",
+      "engine_path": "models/yolo26n_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.5,
+      "class_profile": "pack20",
+      "class_thresholds": {
+        "24": 0.2
+      },
+      "metrics": {
+        "0": {
+          "tp": 8,
+          "fp": 2,
+          "fn": 5,
+          "precision": 0.8,
+          "recall": 0.6153846153846154
+        },
+        "24": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.6666666666666666
+        },
+        "overall": {
+          "tp": 10,
+          "fp": 2,
+          "fn": 6,
+          "precision": 0.8333333333333334,
+          "recall": 0.625
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 8,
+          "fp": 2,
+          "fn": 5,
+          "precision": 0.8,
+          "recall": 0.6153846153846154
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.6666666666666666
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 24.14,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": -3.33,
+      "within_five_point_precision_budget": true
+    },
+    {
+      "engine": "768n",
+      "engine_path": "models/yolo26n_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.45,
+      "class_profile": "pack20",
+      "class_thresholds": {
+        "24": 0.2
+      },
+      "metrics": {
+        "0": {
+          "tp": 8,
+          "fp": 3,
+          "fn": 5,
+          "precision": 0.7272727272727273,
+          "recall": 0.6153846153846154
+        },
+        "24": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.6666666666666666
+        },
+        "overall": {
+          "tp": 10,
+          "fp": 3,
+          "fn": 6,
+          "precision": 0.7692307692307693,
+          "recall": 0.625
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 8,
+          "fp": 3,
+          "fn": 5,
+          "precision": 0.7272727272727273,
+          "recall": 0.6153846153846154
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.6666666666666666
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 24.05,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": 3.08,
+      "within_five_point_precision_budget": true
+    },
+    {
+      "engine": "768n",
+      "engine_path": "models/yolo26n_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.4,
+      "class_profile": "pack20",
+      "class_thresholds": {
+        "24": 0.2
+      },
+      "metrics": {
+        "0": {
+          "tp": 8,
+          "fp": 3,
+          "fn": 5,
+          "precision": 0.7272727272727273,
+          "recall": 0.6153846153846154
+        },
+        "24": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.6666666666666666
+        },
+        "overall": {
+          "tp": 10,
+          "fp": 3,
+          "fn": 6,
+          "precision": 0.7692307692307693,
+          "recall": 0.625
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 8,
+          "fp": 3,
+          "fn": 5,
+          "precision": 0.7272727272727273,
+          "recall": 0.6153846153846154
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.6666666666666666
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 24.35,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": 3.08,
+      "within_five_point_precision_budget": true
+    },
+    {
+      "engine": "768n",
+      "engine_path": "models/yolo26n_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.6,
+      "class_profile": "pack10",
+      "class_thresholds": {
+        "24": 0.1
+      },
+      "metrics": {
+        "0": {
+          "tp": 8,
+          "fp": 2,
+          "fn": 5,
+          "precision": 0.8,
+          "recall": 0.6153846153846154
+        },
+        "24": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "overall": {
+          "tp": 11,
+          "fp": 2,
+          "fn": 5,
+          "precision": 0.8461538461538461,
+          "recall": 0.6875
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 8,
+          "fp": 2,
+          "fn": 5,
+          "precision": 0.8,
+          "recall": 0.6153846153846154
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 24.19,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": -4.62,
+      "within_five_point_precision_budget": true
+    },
+    {
+      "engine": "768n",
+      "engine_path": "models/yolo26n_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.55,
+      "class_profile": "pack10",
+      "class_thresholds": {
+        "24": 0.1
+      },
+      "metrics": {
+        "0": {
+          "tp": 8,
+          "fp": 2,
+          "fn": 5,
+          "precision": 0.8,
+          "recall": 0.6153846153846154
+        },
+        "24": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "overall": {
+          "tp": 11,
+          "fp": 2,
+          "fn": 5,
+          "precision": 0.8461538461538461,
+          "recall": 0.6875
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 8,
+          "fp": 2,
+          "fn": 5,
+          "precision": 0.8,
+          "recall": 0.6153846153846154
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 22.15,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": -4.62,
+      "within_five_point_precision_budget": true
+    },
+    {
+      "engine": "768n",
+      "engine_path": "models/yolo26n_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.5,
+      "class_profile": "pack10",
+      "class_thresholds": {
+        "24": 0.1
+      },
+      "metrics": {
+        "0": {
+          "tp": 8,
+          "fp": 2,
+          "fn": 5,
+          "precision": 0.8,
+          "recall": 0.6153846153846154
+        },
+        "24": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "overall": {
+          "tp": 11,
+          "fp": 2,
+          "fn": 5,
+          "precision": 0.8461538461538461,
+          "recall": 0.6875
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 8,
+          "fp": 2,
+          "fn": 5,
+          "precision": 0.8,
+          "recall": 0.6153846153846154
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 21.68,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": -4.62,
+      "within_five_point_precision_budget": true
+    },
+    {
+      "engine": "768n",
+      "engine_path": "models/yolo26n_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.45,
+      "class_profile": "pack10",
+      "class_thresholds": {
+        "24": 0.1
+      },
+      "metrics": {
+        "0": {
+          "tp": 8,
+          "fp": 3,
+          "fn": 5,
+          "precision": 0.7272727272727273,
+          "recall": 0.6153846153846154
+        },
+        "24": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "overall": {
+          "tp": 11,
+          "fp": 3,
+          "fn": 5,
+          "precision": 0.7857142857142857,
+          "recall": 0.6875
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 8,
+          "fp": 3,
+          "fn": 5,
+          "precision": 0.7272727272727273,
+          "recall": 0.6153846153846154
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 20.74,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": 1.43,
+      "within_five_point_precision_budget": true
+    },
+    {
+      "engine": "768n",
+      "engine_path": "models/yolo26n_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.4,
+      "class_profile": "pack10",
+      "class_thresholds": {
+        "24": 0.1
+      },
+      "metrics": {
+        "0": {
+          "tp": 8,
+          "fp": 3,
+          "fn": 5,
+          "precision": 0.7272727272727273,
+          "recall": 0.6153846153846154
+        },
+        "24": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "overall": {
+          "tp": 11,
+          "fp": 3,
+          "fn": 5,
+          "precision": 0.7857142857142857,
+          "recall": 0.6875
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 8,
+          "fp": 3,
+          "fn": 5,
+          "precision": 0.7272727272727273,
+          "recall": 0.6153846153846154
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 20.7,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": 1.43,
+      "within_five_point_precision_budget": true
+    },
+    {
+      "engine": "768s",
+      "engine_path": "models/yolo26s_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.6,
+      "class_profile": "global",
+      "class_thresholds": {},
+      "metrics": {
+        "0": {
+          "tp": 9,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.8181818181818182,
+          "recall": 0.6923076923076923
+        },
+        "24": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 2,
+          "precision": 1.0,
+          "recall": 0.3333333333333333
+        },
+        "overall": {
+          "tp": 10,
+          "fp": 2,
+          "fn": 6,
+          "precision": 0.8333333333333334,
+          "recall": 0.625
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 9,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.8181818181818182,
+          "recall": 0.6923076923076923
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 2,
+          "precision": 1.0,
+          "recall": 0.3333333333333333
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 28.02,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": -3.33,
+      "within_five_point_precision_budget": true
+    },
+    {
+      "engine": "768s",
+      "engine_path": "models/yolo26s_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.55,
+      "class_profile": "global",
+      "class_thresholds": {},
+      "metrics": {
+        "0": {
+          "tp": 9,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.8181818181818182,
+          "recall": 0.6923076923076923
+        },
+        "24": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 2,
+          "precision": 1.0,
+          "recall": 0.3333333333333333
+        },
+        "overall": {
+          "tp": 10,
+          "fp": 2,
+          "fn": 6,
+          "precision": 0.8333333333333334,
+          "recall": 0.625
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 9,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.8181818181818182,
+          "recall": 0.6923076923076923
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 2,
+          "precision": 1.0,
+          "recall": 0.3333333333333333
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 26.82,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": -3.33,
+      "within_five_point_precision_budget": true
+    },
+    {
+      "engine": "768s",
+      "engine_path": "models/yolo26s_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.5,
+      "class_profile": "global",
+      "class_thresholds": {},
+      "metrics": {
+        "0": {
+          "tp": 9,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.8181818181818182,
+          "recall": 0.6923076923076923
+        },
+        "24": {
+          "tp": 1,
+          "fp": 2,
+          "fn": 2,
+          "precision": 0.3333333333333333,
+          "recall": 0.3333333333333333
+        },
+        "overall": {
+          "tp": 10,
+          "fp": 4,
+          "fn": 6,
+          "precision": 0.7142857142857143,
+          "recall": 0.625
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 9,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.8181818181818182,
+          "recall": 0.6923076923076923
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 1,
+          "fp": 2,
+          "fn": 2,
+          "precision": 0.3333333333333333,
+          "recall": 0.3333333333333333
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 27.62,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": 8.57,
+      "within_five_point_precision_budget": false
+    },
+    {
+      "engine": "768s",
+      "engine_path": "models/yolo26s_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.45,
+      "class_profile": "global",
+      "class_thresholds": {},
+      "metrics": {
+        "0": {
+          "tp": 9,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.8181818181818182,
+          "recall": 0.6923076923076923
+        },
+        "24": {
+          "tp": 1,
+          "fp": 2,
+          "fn": 2,
+          "precision": 0.3333333333333333,
+          "recall": 0.3333333333333333
+        },
+        "26": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": null
+        },
+        "overall": {
+          "tp": 10,
+          "fp": 5,
+          "fn": 6,
+          "precision": 0.6666666666666666,
+          "recall": 0.625
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 9,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.8181818181818182,
+          "recall": 0.6923076923076923
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 1,
+          "fp": 3,
+          "fn": 2,
+          "precision": 0.25,
+          "recall": 0.3333333333333333
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 26.12,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": 13.33,
+      "within_five_point_precision_budget": false
+    },
+    {
+      "engine": "768s",
+      "engine_path": "models/yolo26s_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.4,
+      "class_profile": "global",
+      "class_thresholds": {},
+      "metrics": {
+        "0": {
+          "tp": 9,
+          "fp": 4,
+          "fn": 4,
+          "precision": 0.6923076923076923,
+          "recall": 0.6923076923076923
+        },
+        "24": {
+          "tp": 1,
+          "fp": 2,
+          "fn": 2,
+          "precision": 0.3333333333333333,
+          "recall": 0.3333333333333333
+        },
+        "26": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": null
+        },
+        "overall": {
+          "tp": 10,
+          "fp": 7,
+          "fn": 6,
+          "precision": 0.5882352941176471,
+          "recall": 0.625
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 9,
+          "fp": 4,
+          "fn": 4,
+          "precision": 0.6923076923076923,
+          "recall": 0.6923076923076923
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 1,
+          "fp": 3,
+          "fn": 2,
+          "precision": 0.25,
+          "recall": 0.3333333333333333
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 24.51,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": 21.18,
+      "within_five_point_precision_budget": false
+    },
+    {
+      "engine": "768s",
+      "engine_path": "models/yolo26s_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.6,
+      "class_profile": "pack30",
+      "class_thresholds": {
+        "24": 0.3
+      },
+      "metrics": {
+        "0": {
+          "tp": 9,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.8181818181818182,
+          "recall": 0.6923076923076923
+        },
+        "24": {
+          "tp": 1,
+          "fp": 4,
+          "fn": 2,
+          "precision": 0.2,
+          "recall": 0.3333333333333333
+        },
+        "overall": {
+          "tp": 10,
+          "fp": 6,
+          "fn": 6,
+          "precision": 0.625,
+          "recall": 0.625
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 9,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.8181818181818182,
+          "recall": 0.6923076923076923
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 1,
+          "fp": 4,
+          "fn": 2,
+          "precision": 0.2,
+          "recall": 0.3333333333333333
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 24.49,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": 17.5,
+      "within_five_point_precision_budget": false
+    },
+    {
+      "engine": "768s",
+      "engine_path": "models/yolo26s_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.55,
+      "class_profile": "pack30",
+      "class_thresholds": {
+        "24": 0.3
+      },
+      "metrics": {
+        "0": {
+          "tp": 9,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.8181818181818182,
+          "recall": 0.6923076923076923
+        },
+        "24": {
+          "tp": 1,
+          "fp": 4,
+          "fn": 2,
+          "precision": 0.2,
+          "recall": 0.3333333333333333
+        },
+        "overall": {
+          "tp": 10,
+          "fp": 6,
+          "fn": 6,
+          "precision": 0.625,
+          "recall": 0.625
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 9,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.8181818181818182,
+          "recall": 0.6923076923076923
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 1,
+          "fp": 4,
+          "fn": 2,
+          "precision": 0.2,
+          "recall": 0.3333333333333333
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 24.02,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": 17.5,
+      "within_five_point_precision_budget": false
+    },
+    {
+      "engine": "768s",
+      "engine_path": "models/yolo26s_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.5,
+      "class_profile": "pack30",
+      "class_thresholds": {
+        "24": 0.3
+      },
+      "metrics": {
+        "0": {
+          "tp": 9,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.8181818181818182,
+          "recall": 0.6923076923076923
+        },
+        "24": {
+          "tp": 1,
+          "fp": 4,
+          "fn": 2,
+          "precision": 0.2,
+          "recall": 0.3333333333333333
+        },
+        "overall": {
+          "tp": 10,
+          "fp": 6,
+          "fn": 6,
+          "precision": 0.625,
+          "recall": 0.625
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 9,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.8181818181818182,
+          "recall": 0.6923076923076923
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 1,
+          "fp": 4,
+          "fn": 2,
+          "precision": 0.2,
+          "recall": 0.3333333333333333
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 23.88,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": 17.5,
+      "within_five_point_precision_budget": false
+    },
+    {
+      "engine": "768s",
+      "engine_path": "models/yolo26s_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.45,
+      "class_profile": "pack30",
+      "class_thresholds": {
+        "24": 0.3
+      },
+      "metrics": {
+        "0": {
+          "tp": 9,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.8181818181818182,
+          "recall": 0.6923076923076923
+        },
+        "24": {
+          "tp": 1,
+          "fp": 4,
+          "fn": 2,
+          "precision": 0.2,
+          "recall": 0.3333333333333333
+        },
+        "26": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": null
+        },
+        "overall": {
+          "tp": 10,
+          "fp": 7,
+          "fn": 6,
+          "precision": 0.5882352941176471,
+          "recall": 0.625
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 9,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.8181818181818182,
+          "recall": 0.6923076923076923
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 1,
+          "fp": 5,
+          "fn": 2,
+          "precision": 0.16666666666666666,
+          "recall": 0.3333333333333333
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 23.87,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": 21.18,
+      "within_five_point_precision_budget": false
+    },
+    {
+      "engine": "768s",
+      "engine_path": "models/yolo26s_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.4,
+      "class_profile": "pack30",
+      "class_thresholds": {
+        "24": 0.3
+      },
+      "metrics": {
+        "0": {
+          "tp": 9,
+          "fp": 4,
+          "fn": 4,
+          "precision": 0.6923076923076923,
+          "recall": 0.6923076923076923
+        },
+        "24": {
+          "tp": 1,
+          "fp": 4,
+          "fn": 2,
+          "precision": 0.2,
+          "recall": 0.3333333333333333
+        },
+        "26": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": null
+        },
+        "overall": {
+          "tp": 10,
+          "fp": 9,
+          "fn": 6,
+          "precision": 0.5263157894736842,
+          "recall": 0.625
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 9,
+          "fp": 4,
+          "fn": 4,
+          "precision": 0.6923076923076923,
+          "recall": 0.6923076923076923
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 1,
+          "fp": 5,
+          "fn": 2,
+          "precision": 0.16666666666666666,
+          "recall": 0.3333333333333333
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 24.68,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": 27.37,
+      "within_five_point_precision_budget": false
+    },
+    {
+      "engine": "768s",
+      "engine_path": "models/yolo26s_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.6,
+      "class_profile": "pack20",
+      "class_thresholds": {
+        "24": 0.2
+      },
+      "metrics": {
+        "0": {
+          "tp": 9,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.8181818181818182,
+          "recall": 0.6923076923076923
+        },
+        "24": {
+          "tp": 2,
+          "fp": 7,
+          "fn": 1,
+          "precision": 0.2222222222222222,
+          "recall": 0.6666666666666666
+        },
+        "overall": {
+          "tp": 11,
+          "fp": 9,
+          "fn": 5,
+          "precision": 0.55,
+          "recall": 0.6875
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 9,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.8181818181818182,
+          "recall": 0.6923076923076923
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 2,
+          "fp": 7,
+          "fn": 1,
+          "precision": 0.2222222222222222,
+          "recall": 0.6666666666666666
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 22.75,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": 25.0,
+      "within_five_point_precision_budget": false
+    },
+    {
+      "engine": "768s",
+      "engine_path": "models/yolo26s_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.55,
+      "class_profile": "pack20",
+      "class_thresholds": {
+        "24": 0.2
+      },
+      "metrics": {
+        "0": {
+          "tp": 9,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.8181818181818182,
+          "recall": 0.6923076923076923
+        },
+        "24": {
+          "tp": 2,
+          "fp": 7,
+          "fn": 1,
+          "precision": 0.2222222222222222,
+          "recall": 0.6666666666666666
+        },
+        "overall": {
+          "tp": 11,
+          "fp": 9,
+          "fn": 5,
+          "precision": 0.55,
+          "recall": 0.6875
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 9,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.8181818181818182,
+          "recall": 0.6923076923076923
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 2,
+          "fp": 7,
+          "fn": 1,
+          "precision": 0.2222222222222222,
+          "recall": 0.6666666666666666
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 22.48,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": 25.0,
+      "within_five_point_precision_budget": false
+    },
+    {
+      "engine": "768s",
+      "engine_path": "models/yolo26s_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.5,
+      "class_profile": "pack20",
+      "class_thresholds": {
+        "24": 0.2
+      },
+      "metrics": {
+        "0": {
+          "tp": 9,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.8181818181818182,
+          "recall": 0.6923076923076923
+        },
+        "24": {
+          "tp": 2,
+          "fp": 7,
+          "fn": 1,
+          "precision": 0.2222222222222222,
+          "recall": 0.6666666666666666
+        },
+        "overall": {
+          "tp": 11,
+          "fp": 9,
+          "fn": 5,
+          "precision": 0.55,
+          "recall": 0.6875
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 9,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.8181818181818182,
+          "recall": 0.6923076923076923
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 2,
+          "fp": 7,
+          "fn": 1,
+          "precision": 0.2222222222222222,
+          "recall": 0.6666666666666666
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 22.86,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": 25.0,
+      "within_five_point_precision_budget": false
+    },
+    {
+      "engine": "768s",
+      "engine_path": "models/yolo26s_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.45,
+      "class_profile": "pack20",
+      "class_thresholds": {
+        "24": 0.2
+      },
+      "metrics": {
+        "0": {
+          "tp": 9,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.8181818181818182,
+          "recall": 0.6923076923076923
+        },
+        "24": {
+          "tp": 2,
+          "fp": 7,
+          "fn": 1,
+          "precision": 0.2222222222222222,
+          "recall": 0.6666666666666666
+        },
+        "26": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": null
+        },
+        "overall": {
+          "tp": 11,
+          "fp": 10,
+          "fn": 5,
+          "precision": 0.5238095238095238,
+          "recall": 0.6875
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 9,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.8181818181818182,
+          "recall": 0.6923076923076923
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 2,
+          "fp": 8,
+          "fn": 1,
+          "precision": 0.2,
+          "recall": 0.6666666666666666
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 22.39,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": 27.62,
+      "within_five_point_precision_budget": false
+    },
+    {
+      "engine": "768s",
+      "engine_path": "models/yolo26s_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.4,
+      "class_profile": "pack20",
+      "class_thresholds": {
+        "24": 0.2
+      },
+      "metrics": {
+        "0": {
+          "tp": 9,
+          "fp": 4,
+          "fn": 4,
+          "precision": 0.6923076923076923,
+          "recall": 0.6923076923076923
+        },
+        "24": {
+          "tp": 2,
+          "fp": 7,
+          "fn": 1,
+          "precision": 0.2222222222222222,
+          "recall": 0.6666666666666666
+        },
+        "26": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": null
+        },
+        "overall": {
+          "tp": 11,
+          "fp": 12,
+          "fn": 5,
+          "precision": 0.4782608695652174,
+          "recall": 0.6875
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 9,
+          "fp": 4,
+          "fn": 4,
+          "precision": 0.6923076923076923,
+          "recall": 0.6923076923076923
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 2,
+          "fp": 8,
+          "fn": 1,
+          "precision": 0.2,
+          "recall": 0.6666666666666666
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 22.4,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": 32.17,
+      "within_five_point_precision_budget": false
+    },
+    {
+      "engine": "768s",
+      "engine_path": "models/yolo26s_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.6,
+      "class_profile": "pack10",
+      "class_thresholds": {
+        "24": 0.1
+      },
+      "metrics": {
+        "0": {
+          "tp": 9,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.8181818181818182,
+          "recall": 0.6923076923076923
+        },
+        "24": {
+          "tp": 2,
+          "fp": 11,
+          "fn": 1,
+          "precision": 0.15384615384615385,
+          "recall": 0.6666666666666666
+        },
+        "overall": {
+          "tp": 11,
+          "fp": 13,
+          "fn": 5,
+          "precision": 0.4583333333333333,
+          "recall": 0.6875
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 9,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.8181818181818182,
+          "recall": 0.6923076923076923
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 2,
+          "fp": 11,
+          "fn": 1,
+          "precision": 0.15384615384615385,
+          "recall": 0.6666666666666666
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 22.81,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": 34.17,
+      "within_five_point_precision_budget": false
+    },
+    {
+      "engine": "768s",
+      "engine_path": "models/yolo26s_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.55,
+      "class_profile": "pack10",
+      "class_thresholds": {
+        "24": 0.1
+      },
+      "metrics": {
+        "0": {
+          "tp": 9,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.8181818181818182,
+          "recall": 0.6923076923076923
+        },
+        "24": {
+          "tp": 2,
+          "fp": 11,
+          "fn": 1,
+          "precision": 0.15384615384615385,
+          "recall": 0.6666666666666666
+        },
+        "overall": {
+          "tp": 11,
+          "fp": 13,
+          "fn": 5,
+          "precision": 0.4583333333333333,
+          "recall": 0.6875
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 9,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.8181818181818182,
+          "recall": 0.6923076923076923
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 2,
+          "fp": 11,
+          "fn": 1,
+          "precision": 0.15384615384615385,
+          "recall": 0.6666666666666666
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 22.68,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": 34.17,
+      "within_five_point_precision_budget": false
+    },
+    {
+      "engine": "768s",
+      "engine_path": "models/yolo26s_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.5,
+      "class_profile": "pack10",
+      "class_thresholds": {
+        "24": 0.1
+      },
+      "metrics": {
+        "0": {
+          "tp": 9,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.8181818181818182,
+          "recall": 0.6923076923076923
+        },
+        "24": {
+          "tp": 2,
+          "fp": 11,
+          "fn": 1,
+          "precision": 0.15384615384615385,
+          "recall": 0.6666666666666666
+        },
+        "overall": {
+          "tp": 11,
+          "fp": 13,
+          "fn": 5,
+          "precision": 0.4583333333333333,
+          "recall": 0.6875
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 9,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.8181818181818182,
+          "recall": 0.6923076923076923
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 2,
+          "fp": 11,
+          "fn": 1,
+          "precision": 0.15384615384615385,
+          "recall": 0.6666666666666666
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 23.1,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": 34.17,
+      "within_five_point_precision_budget": false
+    },
+    {
+      "engine": "768s",
+      "engine_path": "models/yolo26s_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.45,
+      "class_profile": "pack10",
+      "class_thresholds": {
+        "24": 0.1
+      },
+      "metrics": {
+        "0": {
+          "tp": 9,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.8181818181818182,
+          "recall": 0.6923076923076923
+        },
+        "24": {
+          "tp": 2,
+          "fp": 11,
+          "fn": 1,
+          "precision": 0.15384615384615385,
+          "recall": 0.6666666666666666
+        },
+        "26": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": null
+        },
+        "overall": {
+          "tp": 11,
+          "fp": 14,
+          "fn": 5,
+          "precision": 0.44,
+          "recall": 0.6875
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 9,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.8181818181818182,
+          "recall": 0.6923076923076923
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 2,
+          "fp": 12,
+          "fn": 1,
+          "precision": 0.14285714285714285,
+          "recall": 0.6666666666666666
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 22.53,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": 36.0,
+      "within_five_point_precision_budget": false
+    },
+    {
+      "engine": "768s",
+      "engine_path": "models/yolo26s_768_fp16.engine",
+      "engine_input_resolution": "768x768",
+      "confidence": 0.4,
+      "class_profile": "pack10",
+      "class_thresholds": {
+        "24": 0.1
+      },
+      "metrics": {
+        "0": {
+          "tp": 9,
+          "fp": 4,
+          "fn": 4,
+          "precision": 0.6923076923076923,
+          "recall": 0.6923076923076923
+        },
+        "24": {
+          "tp": 2,
+          "fp": 11,
+          "fn": 1,
+          "precision": 0.15384615384615385,
+          "recall": 0.6666666666666666
+        },
+        "26": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": null
+        },
+        "overall": {
+          "tp": 11,
+          "fp": 16,
+          "fn": 5,
+          "precision": 0.4074074074074074,
+          "recall": 0.6875
+        }
+      },
+      "groups": {
+        "people": {
+          "tp": 9,
+          "fp": 4,
+          "fn": 4,
+          "precision": 0.6923076923076923,
+          "recall": 0.6923076923076923
+        },
+        "vehicles": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "carried_items": {
+          "tp": 2,
+          "fp": 12,
+          "fn": 1,
+          "precision": 0.14285714285714285,
+          "recall": 0.6666666666666666
+        }
+      },
+      "partial_people": {
+        "tp": 2,
+        "fn": 2,
+        "recall": 0.5
+      },
+      "mean_detector_latency_ms": 23.22,
+      "detector_only_fps": null,
+      "precision_drop_points_vs_baseline": 39.26,
+      "within_five_point_precision_budget": false
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+[
+  {
+    "id": "acadia-hiking-people",
+    "name": "Acadia hikers (1080p, 33 s)",
+    "file": "acadia-hiking-people-1080p.mp4",
+    "source": "https://npgallery.nps.gov/AssetDetail/99ba7527-b163-432d-a1c4-f949b0140520",
+    "license": "Public domain: full granting rights"
+  },
+  {
+    "id": "acadia-park-staff",
+    "name": "Acadia park staff and visitors (480p, 22 s)",
+    "file": "acadia-park-staff.mp4",
+    "source": "https://npgallery.nps.gov/AssetDetail/d2f72765-6363-4fe6-bcfa-483f41091a38",
+    "license": "Public domain: full granting rights",
+    "download_url": "https://npgallery.nps.gov/GetAsset/d2f72765-6363-4fe6-bcfa-483f41091a38/proxymdres?"
+  },
+  {
+    "id": "grand-canyon-guided-hike-1",
+    "name": "Grand Canyon guided hike 1 (480p, 1:42)",
+    "file": "grand-canyon-guided-hike-1.mp4",
+    "source": "https://www.nps.gov/grca/learn/photosmultimedia/b-roll_hd17.htm",
+    "license": "Public domain",
+    "download_url": "https://www.nps.gov/nps-audiovideo/audiovideo/0771438d-5fc2-4839-8ddc-723a3ba77137480p.mp4"
+  },
+  {
+    "id": "grand-canyon-guided-hike-2",
+    "name": "Grand Canyon guided hike 2 (480p, 1:37)",
+    "file": "grand-canyon-guided-hike-2.mp4",
+    "source": "https://www.nps.gov/grca/learn/photosmultimedia/b-roll_hd17.htm",
+    "license": "Public domain",
+    "download_url": "https://www.nps.gov/nps-audiovideo/audiovideo/5d878af8-d70f-4fd3-aaff-e49d746a9874480p.mp4"
+  },
+  {
+    "id": "xperience-stereo-rgb",
+    "name": "Xperience stereo RGB (side-by-side, 4:51)",
+    "file": "stereo-xperience/stereo-side-by-side.mp4",
+    "source": "https://huggingface.co/datasets/ropedia-ai/xperience-10m-sample",
+    "license": "See dataset card for terms; synchronized left/right RGB views"
+  },
+  {
+    "id": "stereo-apac-automotive",
+    "name": "Stereo: automotive tail lamp (61 s)",
+    "file": "stereo-apac/automotive-tail-lamp.mp4",
+    "source": "https://huggingface.co/datasets/humyn-labs/APAC-Egocentric-Stereo-Labeled",
+    "license": "CC BY 4.0; rectified side-by-side preview; no camera calibration supplied"
+  },
+  {
+    "id": "stereo-apac-kitchen",
+    "name": "Stereo: chopping an onion (61 s)",
+    "file": "stereo-apac/kitchen-onion.mp4",
+    "source": "https://huggingface.co/datasets/humyn-labs/APAC-Egocentric-Stereo-Labeled",
+    "license": "CC BY 4.0; rectified side-by-side preview; no camera calibration supplied"
+  },
+  {
+    "id": "stereo-apac-retail",
+    "name": "Stereo: arranging saucers (51 s)",
+    "file": "stereo-apac/retail-saucers.mp4",
+    "source": "https://huggingface.co/datasets/humyn-labs/APAC-Egocentric-Stereo-Labeled",
+    "license": "CC BY 4.0; rectified side-by-side preview; no camera calibration supplied"
+  },
+  {
+    "id": "stereo-frc-live-fuel-2026-11-02",
+    "name": "FRC 2026 live fuel pair (stereo, 60 fps, 10 s)",
+    "file": "frc-2026-live-two-fuel-60fps-cfr.mp4",
+    "source": "Captured from Scout USB stereo camera on 2026-11-02",
+    "license": "Team-generated Scout sample"
+  },
+  {
+    "id": "stereo-frc-fuel-settings-fixed-2026-11-02",
+    "name": "FRC 2026 FUEL pair, corrected camera controls (stereo, 60 fps, 10 s)",
+    "file": "frc-2026-fuel-camera-settings-fixed-60fps.mp4",
+    "source": "Captured from Scout USB stereo camera on 2026-11-02 after resetting image controls to defaults",
+    "license": "Team-generated Scout sample"
+  }
+]

@@ -1,0 +1,174 @@
+{
+  "description": "Hand-labeled fixed sample for small, partial and backpack-carrying hiker detections. Boxes use source-video pixel coordinates and COCO class ids.",
+  "images": [
+    {
+      "id": "acadia-hikers-6.7",
+      "video": "../media/acadia-hiking-people-1080p.mp4",
+      "time_seconds": 6.7,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            923,
+            352,
+            1026,
+            675
+          ]
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            1092,
+            369,
+            1206,
+            650
+          ]
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-2-19.3",
+      "video": "../media/grand-canyon-guided-hike-2.mp4",
+      "time_seconds": 19.3,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            18,
+            78,
+            178,
+            343
+          ]
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            365,
+            96,
+            489,
+            353
+          ]
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            558,
+            157,
+            647,
+            323
+          ]
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            502,
+            216,
+            671,
+            480
+          ],
+          "partial": true
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            681,
+            0,
+            830,
+            354
+          ],
+          "partial": true
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            18,
+            157,
+            70,
+            306
+          ]
+        }
+      ]
+    },
+    {
+      "id": "grand-canyon-2-77.2",
+      "video": "../media/grand-canyon-guided-hike-2.mp4",
+      "time_seconds": 77.2,
+      "annotations": [
+        {
+          "class_id": 0,
+          "bbox": [
+            0,
+            307,
+            67,
+            480
+          ],
+          "partial": true
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            79,
+            249,
+            211,
+            469
+          ]
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            250,
+            111,
+            413,
+            428
+          ]
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            423,
+            98,
+            526,
+            390
+          ]
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            552,
+            209,
+            668,
+            350
+          ],
+          "partial": true
+        },
+        {
+          "class_id": 0,
+          "bbox": [
+            656,
+            0,
+            850,
+            431
+          ]
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            98,
+            300,
+            151,
+            375
+          ]
+        },
+        {
+          "class_id": 24,
+          "bbox": [
+            538,
+            375,
+            628,
+            479
+          ]
+        }
+      ]
+    }
+  ]
+}
