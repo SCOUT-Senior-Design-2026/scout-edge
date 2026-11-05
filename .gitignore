@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+.venv*/
+.gst/
+*.log
+media/*
+!media/calibration/
+media/calibration/*
+models/*
+/*.pt
+*.engine
+*.onnx
+evaluation/*
+!.gitkeep
+.backups/

@@ -1,0 +1,9 @@
+[Unit]
+Description=SCOUT Jetson Edge Vision
+After=network-online.target
+[Service]
+WorkingDirectory=%h/scout-edge
+ExecStart=%h/scout-edge/.venv/bin/python -m scout --source 0 --host 0.0.0.0 --port 8080
+Restart=always
+[Install]
+WantedBy=default.target
