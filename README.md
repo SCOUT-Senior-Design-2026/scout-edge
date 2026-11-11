@@ -1,6 +1,28 @@
 # SCOUT Edge Vision
 
-Jetson Xavier edge-inference prototype for 1080p/60 video with browser-viewable overlays.
+Jetson edge-inference prototype with browser-viewable overlays. The current target is the ARK Just A Jetson with an Orin NX and Gremsy Lynx mainboard. The earlier Xavier measurements below are historical, not measurements of the Orin NX.
+
+## Lynx dashboard on Orin NX
+
+The default source is `rtsp://192.168.144.240:8554/payload`. The Jetson needs an Ethernet connection to the Lynx mainboard on the same subnet. Start the app as the `jetson` user:
+
+```bash
+cd ~/scout-edge
+.venv/bin/python -m scout --host 0.0.0.0 --port 8080
+```
+
+Open `http://192.168.55.1:8080` from the USB-connected computer or `http://10.42.0.1:8080` from a device connected to the Jetson hotspot. The dashboard is available to clients on the network without an application login. Full screen expands the video in the browser; it does not configure HDMI output.
+
+The default motion baseline outlines image changes and does **not** identify people. An Orin-compatible TensorRT engine and working TensorRT/PyCUDA installation are required for object labels. A TensorRT engine built for another Jetson cannot be assumed compatible. Cube/GNSS telemetry is not yet connected to the dashboard. See the [hardware target interface contract](docs/hardware-target.md) for the current requirements and verification limits.
+
+The pipeline is shared across browser viewers and retries a disconnected source. The browser preview defaults to 15 FPS to reduce hotspot bandwidth; set `SCOUT_PREVIEW_FPS` from 1 to 60 to change this limit. Processed FPS counts frames read and processed by the server; processing time begins after capture. Browser display FPS, source-to-screen latency, and RTK accuracy are not measured by this UI.
+
+### Install on Jetson
+
+Run `./scripts/install-jetson.sh` as the Jetson user. It requests sudo for system packages, installs `requirements-jetson.txt` in `.venv`, and starts a user service. The Jetson-specific requirements keep NumPy below version 2 for the installed JetPack OpenCV build. An internet connection and the Ubuntu `python3-venv` package are required for this installer. The existing ARK UI on port 80 is separate from SCOUT on port 8080.
+
+Use `python -m scout --source <URL-or-file>` to select a different source. Run the focused pipeline checks with `.venv/bin/python -m unittest discover -s tests`.
+
 
 ## Local run
 
@@ -24,14 +46,14 @@ The script copies the project to `/home/xavier/scout-edge`. On the Jetson, run t
 
 ```bash
 cd ~/scout-edge
-sudo ./scripts/install-jetson.sh
+./scripts/install-jetson.sh
 ```
 
 This installs ARM-compatible system packages, creates the Python environment, and starts the user service at `http://192.168.55.1:8080`. No credentials are stored in the repository.
 
 ## Measurement
 
-The UI reports capture FPS, inference FPS, end-to-end latency, frame drops, and detector name. This is the evidence needed to evaluate whether the Xavier sustains 60 input frames/sec; overlay smoothness alone is not sufficient.
+The UI reports processed FPS, post-capture processing time, and detector name. These values do not measure input capture rate or end-to-end display latency. Use independent instrumentation before claiming a sustained 60 FPS video path.
 
 ## Xavier-local benchmark video
 

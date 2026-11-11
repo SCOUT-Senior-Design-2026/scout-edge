@@ -18,6 +18,6 @@ valid = [x for x in samples if 'capture_fps' in x and x.get('status') == 'runnin
 if not valid:
     raise SystemExit('no running samples collected')
 for key in ('capture_fps','inference_fps','display_fps','latency_ms','inference_latency_ms'):
-    values = [float(x[key]) for x in valid if key in x]
+    values = [float(x[key]) for x in valid if x.get(key) is not None]
     if values: print(f'{key}: avg={sum(values)/len(values):.2f} min={min(values):.2f} max={max(values):.2f}')
 print(f'valid_samples: {len(valid)}')

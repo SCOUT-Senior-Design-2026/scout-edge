@@ -13,3 +13,5 @@ models/*
 evaluation/*
 !.gitkeep
 .backups/
+
+.wheelhouse/

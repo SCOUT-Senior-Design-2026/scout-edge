@@ -1,9 +1,9 @@
 import argparse
-from .app import create_app
+from .app import LYNX_SOURCE, create_app
 import uvicorn
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--source', default='0')
+parser.add_argument('--source', default=LYNX_SOURCE)
 parser.add_argument('--host', default='0.0.0.0')
 parser.add_argument('--port', type=int, default=8080)
 parser.add_argument('--detector', choices=['motion','tensorrt'], default=None)
