@@ -2,3 +2,4 @@
 numpy>=1.21,<2
 fastapi>=0.115,<1
 uvicorn>=0.30,<1
+pymavlink>=2.4,<3

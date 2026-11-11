@@ -222,7 +222,7 @@
         setConnection(running, label);
         element('overlayTitle').textContent = stats.encoder_error ? 'Preview unavailable' : (stats.status === 'reconnecting' ? 'Camera unavailable' : 'Connecting to camera');
         element('overlayDetail').textContent = stats.encoder_error || stats.error || 'Waiting for the video source.';
-        element('source').textContent = stats.source_name;
+        element('source').textContent = stats.source_name + (stats.camera_mode === 'thermal' ? ' / Thermal' : (stats.camera_mode === 'probe' ? ' / Visible light check' : ' / Visible'));
         const resolution = running ? (stats.input_resolution || '—') : '—';
         const preview = Number.isFinite(stats.preview_limit_fps) ? `${stats.preview_limit_fps} fps max` : '—';
         element('resolution').textContent = resolution;
@@ -242,7 +242,7 @@
         element('tracking').textContent = stats.tracking || '—';
         element('detectorRate').textContent = running && stats.detector_fps > 0 ? `${stats.detector_fps.toFixed(1)} fps` : '—';
         element('viewType').textContent = motion ? 'Motion baseline' : 'Object detector';
-        element('viewDetail').textContent = motion ? '/ highlights image changes' : (tracked ? '/ optical flow + Kalman tracking' : '/ labels from configured model');
+        element('viewDetail').textContent = stats.camera_mode === 'thermal' ? '/ thermal view; detector not validated on thermal' : (motion ? '/ highlights image changes' : (tracked ? '/ optical flow + Kalman tracking' : '/ labels from configured model'));
         element('detectionLabel').textContent = motion ? 'Motion regions' : 'Detections';
         const count = Array.isArray(stats.detections) ? stats.detections.length : 0;
         element('detections').textContent = running && stats.detector_status !== 'starting' ? (count >= 20 ? '20+' : String(count)) : '—';

@@ -11,6 +11,7 @@ from fastapi import FastAPI
 from fastapi.responses import FileResponse, StreamingResponse
 from .detectors import COCO_NAMES, create_detector
 from .tracking import create_tracked_detector
+from .lowlight import GremsyView, LowLightPolicy
 
 ROOT = Path(__file__).parent
 LYNX_SOURCE = 'rtsp://192.168.144.240:8554/payload'
@@ -24,6 +25,9 @@ class Pipeline:
         base_detector = create_detector('tensorrt' if mode == 'tracked' else mode, engine)
         self.detector = create_tracked_detector(base_detector) if mode == 'tracked' else base_detector
         self.mode = mode
+        self.lowlight = LowLightPolicy() if self.source == LYNX_SOURCE and os.getenv('SCOUT_LOWLIGHT', '1') == '1' else None
+        self.camera_view = None
+        self.lowlight_fault = None
         self.stop_event = threading.Event()
         self.changed = threading.Condition()
         self.thread = None
@@ -44,6 +48,8 @@ class Pipeline:
             'detection_age_ms': None, 'detector_status': None,
             'model_input_resolution': getattr(self.detector, 'input_resolution', None),
             'flow_resolution': None,
+            'camera_mode': 'visible', 'lowlight_status': 'starting' if self.lowlight else 'disabled',
+            'visible_luminance': None,
             'encoded_fps': 0.0, 'encoder_error': None, 'preview_dropped': 0,
         }
 
@@ -142,6 +148,26 @@ class Pipeline:
                         if not ok:
                             raise RuntimeError('Video source stopped delivering frames')
                     started = time.monotonic()
+                    if self.lowlight:
+                        try:
+                            if self.lowlight_fault:
+                                raise RuntimeError(self.lowlight_fault)
+                            if self.camera_view is None:
+                                self.camera_view = GremsyView()
+                            desired = self.lowlight.update(frame, started)
+                            if desired:
+                                self.camera_view.set_mode(desired == 'thermal')
+                                self.lowlight.switched(desired, started)
+                                reset = getattr(self.detector, 'reset', None)
+                                if reset:
+                                    reset()
+                                self.update(camera_mode=desired, lowlight_status='active', detections=[])
+                                continue
+                            self.update(lowlight_status='active', visible_luminance=self.lowlight.luminance)
+                        except Exception as exc:
+                            self.lowlight_fault = str(exc)
+                            self.update(lowlight_status='error: ' + str(exc))
+                            raise RuntimeError('Automatic camera switching failed: ' + str(exc)) from exc
                     infer_started = time.monotonic()
                     result = self.detector.infer(frame)
                     detections = result[0] if isinstance(result, tuple) else result
@@ -200,6 +226,12 @@ class Pipeline:
             finally:
                 if cap is not None:
                     cap.release()
+        if self.camera_view:
+            try:
+                if self.lowlight.mode == 'thermal':
+                    self.camera_view.set_mode(False)
+            finally:
+                self.camera_view.close()
         self.update(status='stopped')
 
 

@@ -4,7 +4,9 @@ SCOUT reads the Gremsy Lynx RTSP feed on an Orin NX and serves a browser dashboa
 
 ## Lynx dashboard on Orin NX
 
-The default source is `rtsp://192.168.144.240:8554/payload`. The current Lynx stream is 1280×720. The supplied model export uses a 1280×736 tensor: the 720-pixel image is padded by eight pixels at the top and bottom, with no spatial downscaling. If the camera output changes size, build an engine for that input before claiming native-resolution detection. Optical flow runs at one-quarter width and height; its resulting boxes are mapped back to the original video coordinates.
+The default source is `rtsp://192.168.144.240:8554/payload`. Build a model engine for the configured stream size before claiming native-resolution detection. For 1280×720, use a 1280×736 tensor; for 1920×1080, use 1920×1088. Both preserve source pixels and pad vertically. The setup scripts default to 720p; select a separately built 1080p engine with `SCOUT_ENGINE` for a 1080p stream. Optical flow runs at one-quarter width and height; its resulting boxes are mapped back to the original video coordinates.
+
+For the default Lynx source, low-light switching uses the camera's MAVLink view control. After five seconds with median visible luminance below 22/255, it switches the main feed to thermal. Every 30 seconds it briefly checks visible light; a median of at least 35/255 returns to visible mode. Other viewers of the main stream see the same changes. Set `SCOUT_LOWLIGHT=0` to disable this behavior. The existing YOLO26 model is trained for visible imagery and has not been validated on thermal imagery; thermal detections may be unreliable. The thermal sensor is 640×512 even when its view is encoded in a 1080p stream. The thresholds and switching timing require field validation.
 
 The Jetson needs Ethernet connectivity to the Lynx mainboard. With the engine installed, start the app as the `jetson` user:
 
