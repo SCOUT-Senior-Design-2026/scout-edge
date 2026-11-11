@@ -74,6 +74,7 @@
     .rows { margin: 0; padding: 0 17px 16px; }
     .row { display: flex; justify-content: space-between; align-items: baseline; gap: 15px; padding: 8px 0; }
     .row + .row { border-top: 1px solid #2a4560; }
+    .row[hidden] { display: none; }
     dt { color: var(--muted); font-size: 12px; }
     dd { margin: 0; color: var(--text); font-size: 12px; font-weight: 600; text-align: right; }
     dd.value { font-weight: 500; }
@@ -152,7 +153,11 @@
           <div class="section-head"><h2>Vision</h2></div>
           <dl class="rows">
             <div class="row"><dt>Detector</dt><dd id="detector">—</dd></div>
+            <div class="row" id="modelInputRow" hidden><dt>Model input</dt><dd id="modelInput" class="value">—</dd></div>
+            <div class="row" id="trackingRow" hidden><dt>Tracking</dt><dd id="tracking">—</dd></div>
+            <div class="row" id="detectorRateRow" hidden><dt>Detector rate</dt><dd id="detectorRate" class="value">—</dd></div>
             <div class="row"><dt>Processed</dt><dd id="fps" class="value">—</dd></div>
+            <div class="row"><dt>Preview encoded</dt><dd id="encodedRate" class="value">—</dd></div>
             <div class="row"><dt>Processing time</dt><dd id="latency" class="value">—</dd></div>
             <div class="row"><dt id="detectionLabel">Motion regions</dt><dd id="detections" class="value">—</dd></div>
           </dl>
@@ -212,11 +217,11 @@
         const response = await fetch('/api/stats', {cache: 'no-store'});
         if (!response.ok) throw new Error('Status unavailable');
         const stats = await response.json();
-        const running = stats.status === 'running';
-        const label = stats.status === 'reconnecting' ? 'Reconnecting' : 'Connecting';
+        const running = stats.status === 'running' && !stats.encoder_error;
+        const label = stats.encoder_error ? 'Preview error' : (stats.status === 'reconnecting' ? 'Reconnecting' : 'Connecting');
         setConnection(running, label);
-        element('overlayTitle').textContent = stats.status === 'reconnecting' ? 'Camera unavailable' : 'Connecting to camera';
-        element('overlayDetail').textContent = stats.error || 'Waiting for the video source.';
+        element('overlayTitle').textContent = stats.encoder_error ? 'Preview unavailable' : (stats.status === 'reconnecting' ? 'Camera unavailable' : 'Connecting to camera');
+        element('overlayDetail').textContent = stats.encoder_error || stats.error || 'Waiting for the video source.';
         element('source').textContent = stats.source_name;
         const resolution = running ? (stats.input_resolution || '—') : '—';
         const preview = Number.isFinite(stats.preview_limit_fps) ? `${stats.preview_limit_fps} fps max` : '—';
@@ -225,13 +230,22 @@
         element('videoFormat').textContent = `${resolution}  /  ${preview} preview`;
         element('fps').textContent = running ? `${Number(stats.capture_fps).toFixed(1)} fps` : '—';
         element('latency').textContent = running && Number.isFinite(stats.latency_ms) ? `${stats.latency_ms.toFixed(1)} ms` : '—';
+        element('encodedRate').textContent = running && Number.isFinite(stats.encoded_fps) && stats.encoded_fps > 0 ? `${stats.encoded_fps.toFixed(1)} fps` : '—';
         const motion = stats.detector === 'motion-baseline';
-        element('detector').textContent = motion ? 'Motion baseline' : (stats.detector || '—');
+        const tracked = Boolean(stats.tracking);
+        const detectorName = (stats.detector || '—').split(' + ')[0];
+        element('detector').textContent = motion ? 'Motion baseline' : (detectorName.startsWith('yolo26n_') ? 'YOLO26n / TensorRT' : detectorName);
+        element('modelInputRow').hidden = !stats.model_input_resolution;
+        element('modelInput').textContent = stats.model_input_resolution || '—';
+        element('trackingRow').hidden = !tracked;
+        element('detectorRateRow').hidden = !tracked;
+        element('tracking').textContent = stats.tracking || '—';
+        element('detectorRate').textContent = running && stats.detector_fps > 0 ? `${stats.detector_fps.toFixed(1)} fps` : '—';
         element('viewType').textContent = motion ? 'Motion baseline' : 'Object detector';
-        element('viewDetail').textContent = motion ? '/ highlights image changes' : '/ labels from configured model';
+        element('viewDetail').textContent = motion ? '/ highlights image changes' : (tracked ? '/ optical flow + Kalman tracking' : '/ labels from configured model');
         element('detectionLabel').textContent = motion ? 'Motion regions' : 'Detections';
         const count = Array.isArray(stats.detections) ? stats.detections.length : 0;
-        element('detections').textContent = running ? (count >= 20 ? '20+' : String(count)) : '—';
+        element('detections').textContent = running && stats.detector_status !== 'starting' ? (count >= 20 ? '20+' : String(count)) : '—';
         element('detectorNote').hidden = !motion;
         const list = element('objectList');
         list.hidden = motion || !running;
@@ -240,7 +254,7 @@
           if (count === 0) {
             const row = document.createElement('div');
             row.className = 'object-row';
-            row.textContent = 'No detections in this frame';
+            row.textContent = stats.detector_status === 'starting' ? 'Starting object detector' : 'No detections in this frame';
             list.append(row);
           } else {
             for (const detection of stats.detections.slice(0, 5)) {
@@ -248,8 +262,10 @@
               const label = document.createElement('span');
               const confidence = document.createElement('span');
               row.className = 'object-row';
-              label.textContent = detection.label;
-              confidence.textContent = Number.isFinite(detection.confidence) ? `${Math.round(detection.confidence * 100)}%` : '';
+              label.textContent = detection.track_id != null ? `${detection.label} #${detection.track_id}` : detection.label;
+              confidence.textContent = detection.tracked
+                ? `tracked · ${Math.round(detection.detection_age_ms || 0)} ms`
+                : (Number.isFinite(detection.confidence) ? `${Math.round(detection.confidence * 100)}%` : '');
               row.append(label, confidence);
               list.append(row);
             }
@@ -265,7 +281,7 @@
         setConnection(false, 'Offline', false);
         element('overlayTitle').textContent = 'Jetson unavailable';
         element('overlayDetail').textContent = 'Check the USB or hotspot connection.';
-        for (const id of ['fps', 'latency', 'detections']) element(id).textContent = '—';
+        for (const id of ['fps', 'latency', 'encodedRate', 'detections']) element(id).textContent = '—';
         element('objectList').hidden = true;
         retryStream();
       }

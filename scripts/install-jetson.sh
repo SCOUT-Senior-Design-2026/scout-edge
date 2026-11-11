@@ -7,6 +7,11 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install -y python3-venv python3-pip 
 python3 -m venv --system-site-packages .venv
 .venv/bin/pip install --upgrade pip
 .venv/bin/pip install -r requirements-jetson.txt
+if [ ! -f models/yolo26n_1280x736_fp16.engine ]; then
+  echo 'Build models/yolo26n_1280x736_fp16.engine on this Jetson before starting the service.' >&2
+  echo 'See the Lynx dashboard instructions in README.md.' >&2
+  exit 1
+fi
 mkdir -p "$HOME/.config/systemd/user"
 cp scripts/scout-edge.service "$HOME/.config/systemd/user/scout-edge.service"
 if ! (systemctl --user daemon-reload && systemctl --user enable --now scout-edge.service) 2>/dev/null; then

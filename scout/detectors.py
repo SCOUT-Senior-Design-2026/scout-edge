@@ -49,9 +49,12 @@ class TensorRTDetector(Detector):
                  reuse_preprocess=True, class_confidences=None):
         try:
             import tensorrt as trt
-            import pycuda.driver as cuda
         except ImportError as exc:
-            raise RuntimeError('TensorRT detector requires working tensorrt and pycuda installations') from exc
+            raise RuntimeError('TensorRT detector requires the JetPack TensorRT Python bindings') from exc
+        try:
+            import pycuda.driver as cuda
+        except ImportError:
+            from . import cuda_runtime as cuda
         self.name = Path(engine_path).stem.rsplit('_fp16', 1)[0] + '-tensorrt'
         self.trt, self.cuda = trt, cuda
         self.confidence, self.iou = confidence, iou
@@ -134,6 +137,13 @@ class TensorRTDetector(Detector):
                 device.free()
             self.inputs.clear()
             self.outputs.clear()
+            for event in self.profile_events:
+                close = getattr(event, 'close', None)
+                if close:
+                    close()
+            close = getattr(self.stream, 'close', None)
+            if close:
+                close()
         finally:
             self.cuda_context.pop()
             self.cuda_context.detach()

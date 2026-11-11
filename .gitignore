@@ -15,3 +15,5 @@ evaluation/*
 .backups/
 
 .wheelhouse/
+
+.yolo-config/

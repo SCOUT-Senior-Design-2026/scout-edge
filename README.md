@@ -1,161 +1,51 @@
 # SCOUT Edge Vision
 
-Jetson edge-inference prototype with browser-viewable overlays. The current target is the ARK Just A Jetson with an Orin NX and Gremsy Lynx mainboard. The earlier Xavier measurements below are historical, not measurements of the Orin NX.
+SCOUT reads the Gremsy Lynx RTSP feed on an Orin NX and serves a browser dashboard with object boxes. YOLO26n runs on TensorRT in a worker; optical flow and a Kalman filter update model-seeded tracks between detector frames. Tracks expire when the detector does not reconfirm them. The motion-only baseline is available for diagnostics but is not the default.
 
 ## Lynx dashboard on Orin NX
 
-The default source is `rtsp://192.168.144.240:8554/payload`. The Jetson needs an Ethernet connection to the Lynx mainboard on the same subnet. Start the app as the `jetson` user:
+The default source is `rtsp://192.168.144.240:8554/payload`. The current Lynx stream is 1280×720. The supplied model export uses a 1280×736 tensor: the 720-pixel image is padded by eight pixels at the top and bottom, with no spatial downscaling. If the camera output changes size, build an engine for that input before claiming native-resolution detection. Optical flow runs at one-quarter width and height; its resulting boxes are mapped back to the original video coordinates.
+
+The Jetson needs Ethernet connectivity to the Lynx mainboard. With the engine installed, start the app as the `jetson` user:
 
 ```bash
 cd ~/scout-edge
 .venv/bin/python -m scout --host 0.0.0.0 --port 8080
 ```
 
-Open `http://192.168.55.1:8080` from the USB-connected computer or `http://10.42.0.1:8080` from a device connected to the Jetson hotspot. The dashboard is available to clients on the network without an application login. Full screen expands the video in the browser; it does not configure HDMI output.
+Open `http://192.168.55.1:8080` from the USB-connected computer or `http://10.42.0.1:8080` from a device connected to the Jetson hotspot. The dashboard is available to network clients without an application login. Full screen expands the video in the browser; it does not configure HDMI output.
 
-The default motion baseline outlines image changes and does **not** identify people. An Orin-compatible TensorRT engine and working TensorRT/PyCUDA installation are required for object labels. A TensorRT engine built for another Jetson cannot be assumed compatible. Cube/GNSS telemetry is not yet connected to the dashboard. See the [hardware target interface contract](docs/hardware-target.md) for the current requirements and verification limits.
+The dashboard distinguishes processed frames, encoded preview frames, and detector rate. The browser preview defaults to a maximum of 60 FPS; `SCOUT_PREVIEW_FPS` can lower it for limited bandwidth. MJPEG bandwidth and actual browser display rate depend on the scene, network, and client. Processing time starts after capture and excludes preview encoding and display; it is not camera-to-screen latency. Cube/GNSS telemetry is not yet integrated. See the [hardware target interface contract](docs/hardware-target.md) for assumptions and verification limits.
 
-The pipeline is shared across browser viewers and retries a disconnected source. The browser preview defaults to 15 FPS to reduce hotspot bandwidth; set `SCOUT_PREVIEW_FPS` from 1 to 60 to change this limit. Processed FPS counts frames read and processed by the server; processing time begins after capture. Browser display FPS, source-to-screen latency, and RTK accuracy are not measured by this UI.
+The model, exported ONNX file, and TensorRT engine are local artifacts excluded from Git. A TensorRT engine must be built for the target Jetson and its installed TensorRT version. If the default engine is missing, the app reports the error instead of silently switching to motion boxes.
 
-### Install on Jetson
+The Lynx supports onboard 4K recording, but its documented Ethernet live output is HD. A 4K recording can be supplied as a source with a separately built 3840×2176 engine: the 3840×2160 picture is padded by eight pixels above and below, without resizing. This is a supported input geometry, not a claim of 60 FPS at 4K. The camera also has digital zoom; its effect on sensor sampling and this particular live stream has not been verified.
 
-Run `./scripts/install-jetson.sh` as the Jetson user. It requests sudo for system packages, installs `requirements-jetson.txt` in `.venv`, and starts a user service. The Jetson-specific requirements keep NumPy below version 2 for the installed JetPack OpenCV build. An internet connection and the Ubuntu `python3-venv` package are required for this installer. The existing ARK UI on port 80 is separate from SCOUT on port 8080.
+## Preparing YOLO26 and installing on Jetson
 
-Use `python -m scout --source <URL-or-file>` to select a different source. Run the focused pipeline checks with `.venv/bin/python -m unittest discover -s tests`.
-
-
-## Local run
+On a computer with an export environment containing Ultralytics, PyTorch, and ONNX, download the official YOLO26n weights and export them. The weight file used for this setup is the Ultralytics `v8.4.0` release and has SHA-256 `9b09cc8bf347f0fc8a5f7657480587f25db09b34bf33b0652110fb03a8ad4fef`.
 
 ```bash
-python3 -m venv .venv && . .venv/bin/activate
-pip install -r requirements.txt
-python -m scout --source 0 --host 0.0.0.0 --port 8080
+mkdir -p models
+curl -fL https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26n.pt -o models/yolo26n.pt
+SCOUT_EXPORT_PYTHON=/path/to/export-env/bin/python ./scripts/setup-yolo.sh
 ```
 
-Open `http://localhost:8080`. Set `--source` to a video file for replay. The default detector is a lightweight motion detector so the transport/UI can be validated before installing a TensorRT model. The detector adapter is isolated in `Pipeline.read()` for replacement with TensorRT or DeepStream labels.
-
-## Jetson USB deployment
-
-With the Xavier connected by USB device mode, run:
-
-```bash
-./scripts/deploy-usb.sh xavier@192.168.55.1
-```
-
-The script copies the project to `/home/xavier/scout-edge`. On the Jetson, run this once from an interactive SSH session (sudo may request the Xavier user's password):
+Copy `models/yolo26n_1280x736.onnx` to the same path in `~/scout-edge` on the Jetson. Build the engine on that Jetson, then run the installer as the `jetson` user:
 
 ```bash
 cd ~/scout-edge
+./scripts/build-engine.sh
 ./scripts/install-jetson.sh
 ```
 
-This installs ARM-compatible system packages, creates the Python environment, and starts the user service at `http://192.168.55.1:8080`. No credentials are stored in the repository.
+For a 4K recording, export with `./scripts/setup-yolo.sh models/yolo26n.pt models/yolo26n_3840x2176.onnx 2176 3840`, copy that ONNX to the Jetson, and build it with `./scripts/build-engine.sh models/yolo26n_3840x2176.onnx models/yolo26n_3840x2176_fp16.engine`. Launch with `SCOUT_ENGINE=models/yolo26n_3840x2176_fp16.engine .venv/bin/python -m scout --source /path/to/recording.mp4`. Export and build resource requirements are higher than for the default live feed.
 
-## Measurement
+The installer requests sudo for system packages, installs `requirements-jetson.txt` in `.venv`, and starts a user service after the engine exists. JetPack's TensorRT Python bindings, CUDA runtime, and OpenCV are required. PyCUDA is optional: the app uses the CUDA runtime when PyCUDA is absent. The installer needs network access and the Ubuntu `python3-venv` package. The existing ARK UI on port 80 is separate from SCOUT on port 8080.
 
-The UI reports processed FPS, post-capture processing time, and detector name. These values do not measure input capture rate or end-to-end display latency. Use independent instrumentation before claiming a sustained 60 FPS video path.
+To use a different source or engine, pass `--source` or set `SCOUT_ENGINE` when starting the app. `SCOUT_DETECT_INTERVAL` (default 5) controls detector scheduling in processed frames, `SCOUT_FLOW_INTERVAL` (default 2) controls optical-flow updates, and `SCOUT_TRACK_MAX_AGE` (default 1.0 seconds) bounds how long an unconfirmed track remains. Kalman prediction runs on each processed frame. These settings trade detection freshness and tracking quality against throughput; they do not establish a safety guarantee.
 
-## Xavier-local benchmark video
-
-The people-demo clip is stored locally on the Xavier at `media/acadia-hiking-people-1080p.mp4`, so testing no longer depends on the laptop, webcam, USB video tunnel, or network jitter. It is a 1920x1080 H.264, 23.976 FPS, 33-second National Park Service clip showing people hiking; the NPS asset metadata marks it public domain. SHA-256: `b33d0313f080c7f946a6e17836b4246416a671cb0022e91f60d97205cf220a65`.
-
-Run it locally on the Xavier:
-
-```bash
-cd /home/xavier/scout-edge
-SCOUT_DETECTOR=motion ./scripts/run-local-benchmark.sh media/acadia-hiking-people-1080p.mp4
-```
-
-For YOLO after the engine is built:
-
-```bash
-SCOUT_DETECTOR=tensorrt \
-SCOUT_ENGINE=models/yolo11s_fp16.engine \
-./scripts/run-local-benchmark.sh media/acadia-hiking-people-1080p.mp4
-```
-
-Collect a fair 60-second measurement from another Xavier SSH session:
-
-```bash
-cd /home/xavier/scout-edge
-.venv/bin/python scripts/benchmark-stats.py http://127.0.0.1:8080/api/stats 60
-```
-
-## YOLO11s TensorRT
-
-Provision TensorRT on the Xavier:
-
-```bash
-sudo ./scripts/provision-tensorrt.sh
-```
-
-On the laptop, export the fixed 1080p ONNX model:
-
-```bash
-./scripts/setup-yolo.sh
-```
-
-Copy `models/yolo11s_1080.onnx` to the Xavier, then build and benchmark the Xavier-specific FP16 engine:
-
-```bash
-./scripts/build-engine.sh models/yolo11s_1080.onnx models/yolo11s_fp16.engine
-SCOUT_DETECTOR=tensorrt SCOUT_ENGINE=models/yolo11s_fp16.engine \
-  .venv/bin/python -m scout --source tcp://127.0.0.1:5002
-```
-
-The TensorRT detector uses COCO-80 labels, 1080x1080 letterboxed inference, confidence threshold 0.25, and IoU threshold 0.45. The UI reports active detector, precision, input resolution, inference latency, and measured FPS. A 60 FPS result is only accepted when sustained end-to-end display FPS reaches that target.
-
-## Laptop sample video benchmark
-
-To test the Xavier without a camera, start the laptop-side 1080p/60 sample stream:
-
-```bash
-./scripts/serve-sample-video.sh sample 5002
-```
-
-In another terminal, restart the Xavier app against the USB-network stream:
-
-```bash
-ssh -t xavier@192.168.55.1 \
-  'cd /home/xavier/scout-edge && kill "$(cat scout.pid 2>/dev/null)" 2>/dev/null || true; \
-   nohup .venv/bin/python -m scout --source tcp://127.0.0.1:5002 --host 0.0.0.0 --port 8080 > scout.log 2>&1 & echo $! > scout.pid'
-```
-
-Create the reverse tunnel before the restart command:
-
-```bash
-ssh -o ExitOnForwardFailure=yes -fN -R 5002:127.0.0.1:5002 xavier@192.168.55.1
-```
-
-The sample is generated locally, looped indefinitely, and sent over SSH; no video is uploaded to an external service. For a repeatable 60-second measurement, run:
-
-```bash
-ssh xavier@192.168.55.1 'cd /home/xavier/scout-edge && .venv/bin/python scripts/benchmark-stats.py http://127.0.0.1:8080/api/stats 60'
-```
-
-## Laptop webcam
-
-Use the laptop webcam instead of the generated sample:
-
-```bash
-./scripts/serve-sample-video.sh webcam /dev/video0 5000
-```
-
-The remaining Jetson restart command is the same. If `/dev/video0` is not the camera, inspect available devices with `ls -l /dev/video*` and try `/dev/video1`, `/dev/video2`, or `/dev/video3`. The tested webcam exposes 1920x1080 MJPEG at 30 FPS; use the generated sample mode when testing a 60 FPS input path.
-
-If the laptop firewall blocks direct TCP access from the Xavier, use an SSH reverse tunnel. Leave the webcam streamer running, then run:
-
-```bash
-ssh -o ExitOnForwardFailure=yes -fN \
-  -R 5000:127.0.0.1:5000 xavier@192.168.55.1
-ssh -t xavier@192.168.55.1 \
-  'cd /home/xavier/scout-edge && kill "$(cat scout.pid 2>/dev/null)" 2>/dev/null || true; \
-   nohup .venv/bin/python -m scout --source tcp://127.0.0.1:5000 \
-   --host 0.0.0.0 --port 8080 > scout.log 2>&1 & echo $! > scout.pid'
-```
-
-Use the HTTP URL `http://192.168.55.1:8080`; opening the local `file:///.../index.html` bypasses the running server and will not display the stream.
-
+Run the focused tests with `.venv/bin/python -m unittest discover -s tests`. For rate measurements use `/api/stats` and count frames received by the actual client. Synthetic or prerecorded tests do not establish field detection accuracy or end-to-end display latency. Earlier Xavier experiments are retained in [SAR historical benchmark notes](docs/SAR-historical-benchmark-notes.md).
 
 ## Search and rescue benchmark
 
