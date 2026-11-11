@@ -1,21 +1,277 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SCOUT Edge Vision</title>
-<style>
-:root{color-scheme:dark;--bg:#0a1115;--panel:#101b20;--line:#26373b;--muted:#8fa4a5;--text:#e8f1ed;--green:#a7edbc;--amber:#f3c67b}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 70% -20%,#203b3c 0,transparent 38%),var(--bg);color:var(--text);font:14px/1.5 system-ui,-apple-system,sans-serif}header{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px clamp(18px,4vw,50px);border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:12px}.mark{width:35px;height:35px;display:grid;place-items:center;background:#b7ebc5;color:#12231a;border-radius:9px;font-weight:850;font-size:19px}.brand strong{font-size:16px;letter-spacing:.12em}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:.12em}.header-status,.live{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}.dot{width:8px;height:8px;background:var(--amber);border-radius:50%}.dot.ok{background:#80e7a0;box-shadow:0 0 12px #68d98b}.wrap{max-width:1600px;margin:auto;padding:clamp(20px,3vw,42px)}.intro{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:20px}.eyebrow{color:var(--green);text-transform:uppercase;font-size:11px;font-weight:700;letter-spacing:.16em}.intro h1{font-size:clamp(24px,3vw,36px);line-height:1.15;letter-spacing:-.035em;margin:7px 0}.intro p{margin:0;color:var(--muted)}.workspace{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:18px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}.panel-head{min-height:62px;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 18px}.panel-head strong{font-size:14px}.subtle{color:var(--muted);font-size:12px}.head-left{display:flex;align-items:center;gap:11px}.live{font-weight:700;letter-spacing:.08em}.viewport{position:relative;aspect-ratio:16/9;background:#05090a;display:grid;place-items:center;overflow:hidden}.viewport img{width:100%;height:100%;object-fit:contain}.empty{position:absolute;inset:0;display:grid;place-items:center;text-align:center;background:#071012d9;padding:20px;color:var(--muted)}.empty b{display:block;color:var(--text);font-size:16px;margin-bottom:4px}.empty.hidden{display:none}.camera-foot{display:flex;justify-content:space-between;gap:15px;padding:13px 18px;color:var(--muted);font-size:12px}.camera-foot span:first-child{color:var(--green)}button{font:inherit;cursor:pointer;border:1px solid #385249;border-radius:8px;background:#192c25;color:#c9f4d4;padding:8px 12px;font-size:12px;font-weight:650}button:hover{background:#264132}button:focus-visible{outline:2px solid var(--green);outline-offset:3px}.sidebar{display:grid;align-content:start;gap:14px}.side-title{padding:16px 17px 10px;font-size:12px;font-weight:750;letter-spacing:.1em;text-transform:uppercase;color:#c8d8d2}.metric{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:11px 17px;border-top:1px solid #203034}.metric span{color:var(--muted)}.metric strong{font-size:13px;text-align:right}.metric strong.good{color:var(--green)}.note{padding:13px 17px;margin:0;color:var(--muted);font-size:12px;border-top:1px solid #203034}.detected{min-height:48px;padding:13px 17px;border-top:1px solid #203034;color:var(--muted);font-size:12px}.tag{display:inline-block;background:#1d3828;color:#bdeccb;padding:4px 8px;border-radius:5px;margin:2px}.footnote{margin:18px 2px;color:var(--muted);font-size:12px}.viewport:fullscreen{background:#000}.viewport:fullscreen img{object-fit:contain}@media(max-width:950px){.workspace{grid-template-columns:1fr}.sidebar{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:580px){header{padding:15px 18px}.header-status{display:none}.wrap{padding:22px 16px}.intro{display:block}.intro p{font-size:13px}.sidebar{grid-template-columns:1fr}.camera-foot{display:block}.camera-foot span{display:block}.panel-head{padding:12px}.brand small{letter-spacing:.05em}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101316">
+  <title>Live view · SCOUT</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --page: #101316;
+      --surface: #171b1f;
+      --surface-raised: #1d2226;
+      --line: #30383e;
+      --text: #e9edec;
+      --muted: #a1adb0;
+      --dim: #748186;
+      --accent: #e8bc73;
+      --good: #85cba3;
+      --bad: #e8bc73;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--page); color: var(--text); font-size: 14px; }
+    button { font: inherit; }
+    button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    .topbar {
+      height: 60px; display: flex; justify-content: space-between; align-items: center;
+      gap: 20px; padding: 0 28px; border-bottom: 1px solid var(--line);
+      background: #14181b;
+    }
+    .identity, .top-status, .source, .state { display: flex; align-items: center; }
+    .identity { gap: 13px; }
+    .symbol { width: 24px; height: 24px; display: grid; place-items: center; border: 1px solid #81918d; color: var(--accent); font-size: 17px; line-height: 1; }
+    .wordmark { font-size: 15px; font-weight: 800; letter-spacing: .13em; }
+    .divider { height: 20px; width: 1px; background: var(--line); }
+    .product { color: var(--muted); font-size: 12px; font-weight: 550; }
+    .top-status { gap: 10px; color: var(--muted); font-size: 12px; }
+    .dot { width: 7px; height: 7px; flex: none; border-radius: 50%; background: var(--bad); }
+    .dot.is-live { background: var(--good); box-shadow: 0 0 0 3px #85cba31a; }
+    .shell { max-width: 1680px; margin: 0 auto; padding: 26px 28px 38px; }
+    .page-head { display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 18px; }
+    .kicker { margin: 0 0 6px; color: var(--dim); font-size: 10px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+    h1 { margin: 0; font-size: 25px; font-weight: 650; letter-spacing: -.025em; line-height: 1.2; }
+    .page-caption { color: var(--muted); font-size: 12px; padding-bottom: 3px; }
+    .workspace { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 16px; align-items: start; }
+    .viewer, .sidebar { min-width: 0; border: 1px solid var(--line); background: var(--surface); }
+    .viewer-head { min-height: 56px; display: flex; justify-content: space-between; align-items: center; gap: 15px; padding: 0 17px; }
+    .source { gap: 11px; min-width: 0; }
+    .source-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 650; }
+    .source-kind { color: var(--dim); font-size: 12px; }
+    .state { gap: 8px; color: var(--muted); white-space: nowrap; font-size: 12px; }
+    .stage { position: relative; aspect-ratio: 16 / 9; overflow: hidden; display: grid; place-items: center; background: #080b0d; }
+    .stage img { display: block; width: 100%; height: 100%; object-fit: contain; }
+    .stage-overlay { position: absolute; inset: 0; display: grid; place-items: center; background: #0a0d0fe8; text-align: center; padding: 24px; }
+    .stage-overlay[hidden] { display: none; }
+    .stage-overlay strong { display: block; font-size: 15px; font-weight: 650; }
+    .stage-overlay span { display: block; max-width: 32rem; margin-top: 7px; color: var(--muted); font-size: 13px; line-height: 1.45; }
+    .stage-tools { position: absolute; right: 12px; bottom: 12px; z-index: 1; }
+    .expand {
+      display: inline-flex; align-items: center; gap: 7px; min-height: 34px; padding: 0 11px;
+      border: 1px solid #788489; border-radius: 3px; background: #11181ce8; color: #f1f3f2;
+      font-size: 12px; font-weight: 600; cursor: pointer;
+    }
+    .expand:hover { background: #303c40; }
+    .expand svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.5; }
+    .viewer-foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px 20px; padding: 13px 17px; color: var(--muted); font-size: 12px; }
+    .viewer-foot strong { color: var(--text); font-weight: 550; }
+    .mono, .value { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-variant-numeric: tabular-nums; }
+    .sidebar section + section { border-top: 1px solid var(--line); }
+    .section-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 17px 17px 12px; }
+    .section-head h2 { margin: 0; font-size: 11px; letter-spacing: .11em; text-transform: uppercase; color: #c5cdca; }
+    .section-head span { color: var(--dim); font: 11px ui-monospace, SFMono-Regular, Consolas, monospace; }
+    .rows { margin: 0; padding: 0 17px 16px; }
+    .row { display: flex; justify-content: space-between; align-items: baseline; gap: 15px; padding: 8px 0; }
+    .row + .row { border-top: 1px solid #293136; }
+    dt { color: var(--muted); font-size: 12px; }
+    dd { margin: 0; color: var(--text); font-size: 12px; font-weight: 600; text-align: right; }
+    dd.value { font-weight: 500; }
+    .signal { color: var(--good); }
+    .signal.pending { color: var(--accent); }
+    .notice { margin: 0 17px 17px; padding: 11px 12px; border-left: 2px solid #ad8650; background: #25231e; color: #d8c5a6; font-size: 12px; line-height: 1.5; }
+    .notice strong { color: #f0dfbd; font-weight: 650; }
+    .quiet { margin: 0; padding: 0 17px 17px; color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .object-list { margin: 0 17px 17px; border-top: 1px solid var(--line); }
+    .object-list[hidden] { display: none; }
+    .object-row { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; color: var(--text); font-size: 12px; }
+    .object-row + .object-row { border-top: 1px solid #293136; }
+    .object-row span:last-child { color: var(--muted); font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
+    .footer { display: flex; justify-content: space-between; gap: 16px; margin-top: 16px; color: var(--dim); font-size: 11px; }
+    .footer span:last-child { text-align: right; }
+    .stage:fullscreen { width: 100vw; height: 100vh; aspect-ratio: auto; background: #000; }
+    .stage:fullscreen .expand { margin: 8px; }
+    @media (max-width: 1000px) {
+      .shell { padding: 22px 18px 32px; }
+      .topbar { padding: 0 18px; }
+      .workspace { grid-template-columns: 1fr; }
+      .sidebar { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .sidebar section + section { border-top: 0; border-left: 1px solid var(--line); }
+    }
+    @media (max-width: 700px) {
+      .sidebar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .sidebar section:last-child { grid-column: 1 / -1; border-left: 0; border-top: 1px solid var(--line); }
+    }
+    @media (max-width: 540px) {
+      .topbar { height: 54px; }
+      .product, .topbar .divider, .page-caption, .source-kind { display: none; }
+      .shell { padding: 20px 12px 28px; }
+      h1 { font-size: 22px; }
+      .viewer-head { min-height: 52px; padding: 0 12px; }
+      .viewer-foot { padding: 11px 12px; }
+      .sidebar { display: block; }
+      .sidebar section + section { border-left: 0; border-top: 1px solid var(--line); }
+      .footer { display: block; line-height: 1.8; }
+      .footer span { display: block; }
+      .footer span:last-child { text-align: left; }
+    }
+  </style>
 </head>
 <body>
-<header><div class="brand"><div class="mark">S</div><div><strong>SCOUT</strong><small>EDGE VISION</small></div></div><div class="header-status"><span class="dot" id="headerDot"></span><span id="headerStatus">Connecting to Jetson</span></div></header>
-<div class="wrap"><div class="intro"><div><div class="eyebrow">Search &amp; rescue / live view</div><h1>Eyes on the scene.</h1><p>Monitor the Lynx camera and onboard vision from the Jetson.</p></div></div>
-<div class="workspace"><section class="panel"><div class="panel-head"><div class="head-left"><span class="live"><span class="dot" id="videoDot"></span><span id="liveText">CONNECTING</span></span><span class="subtle" id="source">Gremsy Lynx</span></div><button id="fullscreen" type="button">Full screen</button></div><div class="viewport" id="viewport"><img id="view" src="/stream" alt="Live camera stream with detection overlays"><div class="empty" id="empty"><div><b id="emptyTitle">Connecting to camera</b><span id="emptyDetail">Waiting for the video source.</span></div></div></div><div class="camera-foot"><span id="modeNote">Motion baseline · not object classification</span><span id="resolution">Resolution unavailable</span></div></section>
-<aside class="sidebar"><section class="panel"><div class="side-title">Pipeline</div><div class="metric"><span>Camera</span><strong id="cameraState">Connecting</strong></div><div class="metric"><span>Processed</span><strong id="fps">—</strong></div><div class="metric"><span>Processing time</span><strong id="latency">—</strong></div><div class="metric"><span>Detector</span><strong id="detector">—</strong></div><p class="note">Processing time starts after a frame is captured. It is not camera-to-screen latency.</p></section><section class="panel"><div class="side-title">Detections</div><div class="detected" id="detections">Waiting for video</div><p class="note" id="detectorNote">The motion baseline highlights changes in the image; it does not identify people.</p></section><section class="panel"><div class="side-title">Vehicle position</div><div class="metric"><span>Cube / GNSS</span><strong>Not configured</strong></div><p class="note">Cube position and RTK telemetry are not integrated yet.</p></section></aside></div><p class="footnote">USB: 192.168.55.1:8080 &nbsp;·&nbsp; Hotspot: 10.42.0.1:8080</p></div>
-<script>
-const $=id=>document.getElementById(id);let lastStreamReset=0;
-$('view').addEventListener('error',()=>{setTimeout(()=>{$('view').src='/stream?retry='+Date.now()},3000)});
-$('fullscreen').addEventListener('click',()=>{if(document.fullscreenElement)document.exitFullscreen();else $('viewport').requestFullscreen().catch(()=>{});});
-async function update(){try{const response=await fetch('/api/stats',{cache:'no-store'});if(!response.ok)throw Error('status unavailable');const x=await response.json(),running=x.status==='running';$('headerDot').classList.toggle('ok',running);$('videoDot').classList.toggle('ok',running);$('headerStatus').textContent=running?'Jetson connected':'Camera '+x.status;$('liveText').textContent=running?'LIVE':x.status.toUpperCase();$('cameraState').textContent=running?'Live':x.status;$('cameraState').classList.toggle('good',running);$('empty').classList.toggle('hidden',running);$('emptyTitle').textContent=x.status==='reconnecting'?'Camera disconnected':'Connecting to camera';$('emptyDetail').textContent=x.error||'Waiting for the video source.';$('source').textContent=x.source_name;$('fps').textContent=running?Number(x.capture_fps).toFixed(1)+' fps':'—';$('latency').textContent=x.latency_ms!=null&&running?x.latency_ms.toFixed(1)+' ms':'—';$('detector').textContent=x.detector||'—';$('resolution').textContent=(x.input_resolution||'Resolution unavailable')+' · preview up to '+x.preview_limit_fps+' fps';const motion=x.detector==='motion-baseline';$('modeNote').textContent=motion?'Motion baseline · not object classification':'Object detector · '+(x.precision||'');$('detectorNote').textContent=motion?'The motion baseline highlights changes in the image; it does not identify people.':'Labels and confidence come from the configured model.';const list=$('detections');list.replaceChildren();if(!running)list.textContent='Waiting for video';else if(!x.detections.length)list.textContent=motion?'No motion regions':'No detections';else for(const d of x.detections.slice(0,8)){const tag=document.createElement('span');tag.className='tag';tag.textContent=d.label+(d.confidence==null?'':' '+Math.round(d.confidence*100)+'%');list.append(tag)}}catch(e){$('headerStatus').textContent='Jetson unavailable';$('headerDot').classList.remove('ok');$('videoDot').classList.remove('ok');$('liveText').textContent='OFFLINE';$('empty').classList.remove('hidden');$('emptyTitle').textContent='Jetson unavailable';$('emptyDetail').textContent='Check the USB or hotspot connection.';if(Date.now()-lastStreamReset>5000){$('view').src='/stream?retry='+Date.now();lastStreamReset=Date.now()}}}
-update();setInterval(update,1000);
-</script></body></html>
+  <header class="topbar">
+    <div class="identity"><span class="symbol" aria-hidden="true">+</span><span class="wordmark">SCOUT</span><span class="divider"></span><span class="product">Edge vision</span></div>
+    <div class="top-status" role="status"><span class="dot" id="systemDot"></span><span id="systemStatus">Connecting</span></div>
+  </header>
+
+  <main class="shell">
+    <div class="page-head"><div><p class="kicker">Camera</p><h1>Live view</h1></div><div class="page-caption">Jetson edge station</div></div>
+    <div class="workspace">
+      <section class="viewer" aria-label="Live camera view">
+        <div class="viewer-head">
+          <div class="source"><span class="source-name" id="source">Gremsy Lynx</span><span class="source-kind">/ camera feed</span></div>
+          <div class="state" role="status"><span class="dot" id="feedDot"></span><span id="feedStatus">Connecting</span></div>
+        </div>
+        <div class="stage" id="stage">
+          <img id="view" src="/stream" alt="Live camera feed with vision overlays">
+          <div class="stage-overlay" id="overlay"><div><strong id="overlayTitle">Connecting to camera</strong><span id="overlayDetail">Waiting for the video source.</span></div></div>
+          <div class="stage-tools"><button class="expand" id="fullscreen" type="button" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 16 16"><path d="M6 2H2v4M10 2h4v4M2 10v4h4m8-4v4h-4"/></svg><span id="fullscreenLabel">Full screen</span></button></div>
+        </div>
+        <div class="viewer-foot"><span><strong id="viewType">Motion baseline</strong> <span id="viewDetail">/ highlights image changes</span></span><span class="mono" id="videoFormat">—</span></div>
+      </section>
+
+      <aside class="sidebar" aria-label="Feed and system status">
+        <section>
+          <div class="section-head"><h2>Video</h2></div>
+          <dl class="rows">
+            <div class="row"><dt>Source</dt><dd id="cameraState" class="signal pending">Connecting</dd></div>
+            <div class="row"><dt>Resolution</dt><dd id="resolution" class="value">—</dd></div>
+            <div class="row"><dt>Browser preview</dt><dd id="previewRate" class="value">—</dd></div>
+          </dl>
+        </section>
+        <section>
+          <div class="section-head"><h2>Vision</h2></div>
+          <dl class="rows">
+            <div class="row"><dt>Detector</dt><dd id="detector">—</dd></div>
+            <div class="row"><dt>Processed</dt><dd id="fps" class="value">—</dd></div>
+            <div class="row"><dt>Processing time</dt><dd id="latency" class="value">—</dd></div>
+            <div class="row"><dt id="detectionLabel">Motion regions</dt><dd id="detections" class="value">—</dd></div>
+          </dl>
+          <div class="object-list" id="objectList" hidden aria-label="Detections in the current frame"></div>
+          <p class="notice" id="detectorNote"><strong>Motion baseline</strong><br>Highlights movement; does not identify people.</p>
+        </section>
+        <section>
+          <div class="section-head"><h2>Position</h2></div>
+          <dl class="rows"><div class="row"><dt>Cube / GNSS</dt><dd id="telemetry">Not configured</dd></div></dl>
+          <p class="quiet">Cube position and RTK telemetry are not integrated yet.</p>
+        </section>
+      </aside>
+    </div>
+    <footer class="footer"><span>Processing time is measured after capture; it is not camera-to-screen latency.</span><span>SCOUT / EDGE VISION</span></footer>
+  </main>
+  <script>
+    const element = id => document.getElementById(id);
+    const image = element('view');
+    const stage = element('stage');
+    let retryTimer = null;
+
+    function retryStream() {
+      if (retryTimer !== null) return;
+      retryTimer = setTimeout(() => {
+        retryTimer = null;
+        image.src = '/stream?retry=' + Date.now();
+      }, 3000);
+    }
+    image.addEventListener('error', retryStream);
+
+    element('fullscreen').addEventListener('click', async () => {
+      try {
+        if (document.fullscreenElement) await document.exitFullscreen();
+        else await stage.requestFullscreen();
+      } catch (_) {
+        element('fullscreenLabel').textContent = 'Full screen unavailable';
+      }
+    });
+    document.addEventListener('fullscreenchange', () => {
+      const active = document.fullscreenElement === stage;
+      element('fullscreen').setAttribute('aria-pressed', String(active));
+      element('fullscreenLabel').textContent = active ? 'Exit full screen' : 'Full screen';
+    });
+
+    function setConnection(running, label, systemOnline = true) {
+      element('systemDot').classList.toggle('is-live', systemOnline);
+      element('feedDot').classList.toggle('is-live', running);
+      element('systemStatus').textContent = systemOnline ? 'System online' : 'System offline';
+      element('feedStatus').textContent = running ? 'Live' : label;
+      element('cameraState').textContent = running ? 'Live' : label;
+      element('cameraState').classList.toggle('pending', !running);
+      element('overlay').hidden = running;
+    }
+
+    async function refresh() {
+      try {
+        const response = await fetch('/api/stats', {cache: 'no-store'});
+        if (!response.ok) throw new Error('Status unavailable');
+        const stats = await response.json();
+        const running = stats.status === 'running';
+        const label = stats.status === 'reconnecting' ? 'Reconnecting' : 'Connecting';
+        setConnection(running, label);
+        element('overlayTitle').textContent = stats.status === 'reconnecting' ? 'Camera unavailable' : 'Connecting to camera';
+        element('overlayDetail').textContent = stats.error || 'Waiting for the video source.';
+        element('source').textContent = stats.source_name;
+        const resolution = running ? (stats.input_resolution || '—') : '—';
+        const preview = Number.isFinite(stats.preview_limit_fps) ? `${stats.preview_limit_fps} fps max` : '—';
+        element('resolution').textContent = resolution;
+        element('previewRate').textContent = preview;
+        element('videoFormat').textContent = `${resolution}  /  ${preview} preview`;
+        element('fps').textContent = running ? `${Number(stats.capture_fps).toFixed(1)} fps` : '—';
+        element('latency').textContent = running && Number.isFinite(stats.latency_ms) ? `${stats.latency_ms.toFixed(1)} ms` : '—';
+        const motion = stats.detector === 'motion-baseline';
+        element('detector').textContent = motion ? 'Motion baseline' : (stats.detector || '—');
+        element('viewType').textContent = motion ? 'Motion baseline' : 'Object detector';
+        element('viewDetail').textContent = motion ? '/ highlights image changes' : '/ labels from configured model';
+        element('detectionLabel').textContent = motion ? 'Motion regions' : 'Detections';
+        const count = Array.isArray(stats.detections) ? stats.detections.length : 0;
+        element('detections').textContent = running ? (count >= 20 ? '20+' : String(count)) : '—';
+        element('detectorNote').hidden = !motion;
+        const list = element('objectList');
+        list.hidden = motion || !running;
+        list.replaceChildren();
+        if (!motion && running) {
+          if (count === 0) {
+            const row = document.createElement('div');
+            row.className = 'object-row';
+            row.textContent = 'No detections in this frame';
+            list.append(row);
+          } else {
+            for (const detection of stats.detections.slice(0, 5)) {
+              const row = document.createElement('div');
+              const label = document.createElement('span');
+              const confidence = document.createElement('span');
+              row.className = 'object-row';
+              label.textContent = detection.label;
+              confidence.textContent = Number.isFinite(detection.confidence) ? `${Math.round(detection.confidence * 100)}%` : '';
+              row.append(label, confidence);
+              list.append(row);
+            }
+            if (count > 5) {
+              const more = document.createElement('div');
+              more.className = 'object-row';
+              more.textContent = `${count >= 20 ? 'At least ' : ''}${count - 5} more`;
+              list.append(more);
+            }
+          }
+        }
+      } catch (_) {
+        setConnection(false, 'Offline', false);
+        element('overlayTitle').textContent = 'Jetson unavailable';
+        element('overlayDetail').textContent = 'Check the USB or hotspot connection.';
+        for (const id of ['fps', 'latency', 'detections']) element(id).textContent = '—';
+        element('objectList').hidden = true;
+        retryStream();
+      }
+    }
+    refresh();
+    setInterval(refresh, 1000);
+  </script>
+</body>
+</html>
