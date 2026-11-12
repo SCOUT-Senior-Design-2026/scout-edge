@@ -207,6 +207,7 @@
     let retryTimer = null;
     let gimbalEnabled = false;
     let gimbalAvailable = false;
+    let gimbalWatchdogVerified = false;
     const gimbalButtons = [...document.querySelectorAll('[data-direction]')];
 
     async function refreshGimbal() {
@@ -215,8 +216,9 @@
         if (!response.ok) throw new Error('Gimbal status unavailable');
         const status = await response.json();
         gimbalAvailable = status.enabled;
+        gimbalWatchdogVerified = Boolean(status.watchdog_verified);
         if (!gimbalAvailable) gimbalEnabled = false;
-        element('gimbalStatus').textContent = status.enabled ? 'Controls available' : status.reason;
+        element('gimbalStatus').textContent = status.enabled ? (status.watchdog_verified ? 'Controls available' : 'Controls available · device watchdog unverified') : status.reason;
       } catch (_) {
         gimbalEnabled = false;
         gimbalAvailable = false;
@@ -241,7 +243,7 @@
           return;
         }
         gimbalEnabled = true;
-        element('gimbalStatus').textContent = 'Controls armed; token checked on movement';
+        element('gimbalStatus').textContent = gimbalWatchdogVerified ? 'Controls armed; token checked on movement' : 'Controls armed · device watchdog unverified';
       }
       element('gimbalEnable').textContent = gimbalEnabled ? 'Disable gimbal' : 'Enable gimbal';
       element('gimbalEnable').setAttribute('aria-pressed', String(gimbalEnabled));

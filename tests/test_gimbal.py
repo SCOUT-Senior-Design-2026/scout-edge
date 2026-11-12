@@ -54,5 +54,10 @@ class GimbalTest(unittest.TestCase):
         self.assertFalse(control.status()['enabled'])
         with self.assertRaises(GimbalUnavailable): control.move('up', 'token')
 
+    def test_operator_authorization_does_not_claim_watchdog_verified(self):
+        control = GimbalControl('token', operator_authorized=True, connection_factory=Link)
+        self.assertTrue(control.status()['enabled'])
+        self.assertFalse(control.status()['watchdog_verified'])
+
 
 if __name__ == '__main__': unittest.main()

@@ -12,9 +12,10 @@ class GimbalUnavailable(RuntimeError):
 
 class GimbalControl:
     """Use short rate pulses only after a verified device watchdog is configured."""
-    def __init__(self, token=None, commissioned=False, watchdog_verified=False, connection_factory=None):
+    def __init__(self, token=None, commissioned=False, watchdog_verified=False, connection_factory=None, operator_authorized=False):
         self.token = token or ''
-        self.ready = bool(self.token and commissioned and watchdog_verified)
+        self.watchdog_verified = watchdog_verified
+        self.ready = bool(self.token and ((commissioned and watchdog_verified) or operator_authorized))
         self.lock = threading.Lock()
         self.last_command = 0.0
         self.connection_factory = connection_factory
@@ -23,10 +24,12 @@ class GimbalControl:
     def from_environment(cls):
         return cls(os.getenv('SCOUT_GIMBAL_TOKEN'),
                    os.getenv('SCOUT_GIMBAL_COMMISSIONED') == '1',
-                   os.getenv('SCOUT_GIMBAL_WATCHDOG_VERIFIED') == '1')
+                   os.getenv('SCOUT_GIMBAL_WATCHDOG_VERIFIED') == '1',
+                   operator_authorized=os.getenv('SCOUT_GIMBAL_OPERATOR_AUTHORIZED') == '1')
 
     def status(self):
         return {'enabled': self.ready,
+                'watchdog_verified': self.watchdog_verified,
                 'reason': None if self.ready else 'Gimbal control requires commissioning and a verified device watchdog.'}
 
     def move(self, direction, token):
