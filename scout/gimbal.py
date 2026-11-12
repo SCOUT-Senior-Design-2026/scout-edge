@@ -32,14 +32,23 @@ class GimbalControl:
                 'watchdog_verified': self.watchdog_verified,
                 'reason': None if self.ready else 'Gimbal control requires commissioning and a verified device watchdog.'}
 
-    def move(self, direction, token):
+    def move(self, direction, token, x=None, y=None):
         if not self.ready:
             raise GimbalUnavailable('Gimbal controls are not commissioned')
         if not hmac.compare_digest(self.token.encode(), (token or '').encode()):
             raise PermissionError('Invalid operator token')
         rates = {'up': (-1, 0), 'down': (1, 0), 'left': (0, -1), 'right': (0, 1)}
-        if direction not in rates:
-            raise ValueError('Unknown gimbal direction')
+        if x is None and y is None and direction in rates:
+            pitch, yaw = rates[direction]
+        elif direction is None and x is not None and y is not None:
+            if not math.isfinite(x) or not math.isfinite(y) or abs(x) > 1 or abs(y) > 1:
+                raise ValueError('Joystick axes must be finite values between -1 and 1')
+            magnitude = math.hypot(x, y)
+            if magnitude < .15 or magnitude > 1.001:
+                raise ValueError('Joystick vector must be outside the dead zone and within the unit circle')
+            pitch, yaw = y, x
+        else:
+            raise ValueError('Supply a direction or both joystick axes')
         if not self.lock.acquire(blocking=False):
             raise GimbalUnavailable('Gimbal is busy')
         try:
@@ -58,7 +67,6 @@ class GimbalControl:
                 msg = link.recv_match(type='GIMBAL_DEVICE_ATTITUDE_STATUS', blocking=True, timeout=2)
                 if msg is None or msg.get_srcSystem() != 1 or msg.get_srcComponent() != 154 or msg.failure_flags:
                     raise GimbalUnavailable('No healthy Lynx gimbal feedback')
-                pitch, yaw = rates[direction]
                 try:
                     self._send_rate(link, math.radians(2 * pitch), math.radians(2 * yaw))
                     time.sleep(.15)

@@ -257,8 +257,10 @@ def create_app(source=LYNX_SOURCE, detector_mode=None, engine_path=None):
     app.state.gimbal = GimbalControl.from_environment()
 
     class GimbalMove(BaseModel):
-        direction: str
+        direction: str | None = None
         token: str
+        x: float | None = None
+        y: float | None = None
 
     @app.get('/')
     async def index():
@@ -275,7 +277,7 @@ def create_app(source=LYNX_SOURCE, detector_mode=None, engine_path=None):
     @app.post('/api/gimbal/move')
     async def gimbal_move(move: GimbalMove):
         try:
-            await asyncio.to_thread(app.state.gimbal.move, move.direction, move.token)
+            await asyncio.to_thread(app.state.gimbal.move, move.direction, move.token, move.x, move.y)
         except PermissionError as exc:
             raise HTTPException(status_code=403, detail=str(exc)) from exc
         except ValueError as exc:

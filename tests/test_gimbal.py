@@ -59,5 +59,21 @@ class GimbalTest(unittest.TestCase):
         self.assertTrue(control.status()['enabled'])
         self.assertFalse(control.status()['watchdog_verified'])
 
+    @patch('scout.gimbal.time.sleep', return_value=None)
+    def test_diagonal_joystick_is_bounded_and_stops(self, sleep):
+        link = Link()
+        control = GimbalControl('token', True, True, lambda: link)
+        control.move(None, 'token', .6, -.8)
+        self.assertLess(link.commands[0][5], 0)
+        self.assertGreater(link.commands[0][6], 0)
+        self.assertAlmostEqual(link.commands[0][5], -0.8 * 2 * 3.141592653589793 / 180)
+        self.assertEqual(link.commands[-1][4:7], (0.0, 0.0, 0.0))
+
+    def test_invalid_joystick_vectors_are_rejected(self):
+        control = GimbalControl('token', True, True, Link)
+        for x, y in ((float('nan'), 0), (0, 0), (1, 1), (1.1, 0)):
+            with self.subTest(x=x, y=y), self.assertRaises(ValueError):
+                control.move(None, 'token', x, y)
+
 
 if __name__ == '__main__': unittest.main()
