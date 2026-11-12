@@ -7,11 +7,13 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 
 import cv2
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse, StreamingResponse
+from pydantic import BaseModel
 from .detectors import COCO_NAMES, create_detector
 from .tracking import create_tracked_detector
 from .lowlight import GremsyView, LowLightPolicy
+from .gimbal import GimbalControl, GimbalUnavailable
 
 ROOT = Path(__file__).parent
 LYNX_SOURCE = 'rtsp://192.168.144.240:8554/payload'
@@ -252,6 +254,11 @@ def create_app(source=LYNX_SOURCE, detector_mode=None, engine_path=None):
 
     app = FastAPI(title='SCOUT Edge Vision', lifespan=lifespan)
     app.state.pipeline = pipe
+    app.state.gimbal = GimbalControl.from_environment()
+
+    class GimbalMove(BaseModel):
+        direction: str
+        token: str
 
     @app.get('/')
     async def index():
@@ -260,6 +267,22 @@ def create_app(source=LYNX_SOURCE, detector_mode=None, engine_path=None):
     @app.get('/api/stats')
     async def stats():
         return pipe.snapshot()
+
+    @app.get('/api/gimbal')
+    async def gimbal_status():
+        return app.state.gimbal.status()
+
+    @app.post('/api/gimbal/move')
+    async def gimbal_move(move: GimbalMove):
+        try:
+            await asyncio.to_thread(app.state.gimbal.move, move.direction, move.token)
+        except PermissionError as exc:
+            raise HTTPException(status_code=403, detail=str(exc)) from exc
+        except ValueError as exc:
+            raise HTTPException(status_code=400, detail=str(exc)) from exc
+        except GimbalUnavailable as exc:
+            raise HTTPException(status_code=503, detail=str(exc)) from exc
+        return {'status': 'sent'}
 
     @app.get('/stream')
     async def stream():

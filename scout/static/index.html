@@ -80,6 +80,16 @@
     dd.value { font-weight: 500; }
     .signal { color: var(--good); }
     .signal.pending { color: var(--bad); }
+    .gimbal-controls { padding: 0 17px 17px; }
+    .gimbal-pad { display: grid; grid-template-columns: repeat(3, 42px); gap: 5px; justify-content: center; margin: 10px 0; }
+    .gimbal-pad button { height: 38px; border: 1px solid var(--line); border-radius: 3px; background: var(--surface-raised); color: var(--text); cursor: pointer; }
+    .gimbal-pad button:disabled { opacity: .4; cursor: not-allowed; }
+    .gimbal-pad button:not(:disabled):hover { background: #285679; }
+    .gimbal-pad .up { grid-column: 2; }
+    .gimbal-pad .left { grid-column: 1; grid-row: 2; }
+    .gimbal-pad .right { grid-column: 3; grid-row: 2; }
+    .gimbal-pad .down { grid-column: 2; grid-row: 3; }
+    .gimbal-token { width: 100%; padding: 8px; border: 1px solid var(--line); background: var(--page); color: var(--text); }
     .notice { margin: 0 17px 17px; padding: 11px 12px; border-left: 2px solid #d2a964; background: #263143; color: #eedcc0; font-size: 12px; line-height: 1.5; }
     .notice strong { color: #fff1d8; font-weight: 650; }
     .quiet { margin: 0; padding: 0 17px 17px; color: var(--muted); font-size: 12px; line-height: 1.5; }
@@ -165,6 +175,20 @@
           <p class="notice" id="detectorNote"><strong>Motion baseline</strong><br>Highlights movement; does not identify people.</p>
         </section>
         <section>
+          <div class="section-head"><h2>Gimbal</h2></div>
+          <div class="gimbal-controls">
+            <p class="quiet" id="gimbalStatus" role="status">Checking controls…</p>
+            <input class="gimbal-token" id="gimbalToken" type="password" placeholder="Operator token" aria-label="Gimbal operator token" autocomplete="off" disabled>
+            <div class="gimbal-pad" aria-label="Gimbal direction controls">
+              <button class="up" data-direction="up" aria-label="Tilt up" disabled>▲</button>
+              <button class="left" data-direction="left" aria-label="Pan left" disabled>◀</button>
+              <button class="right" data-direction="right" aria-label="Pan right" disabled>▶</button>
+              <button class="down" data-direction="down" aria-label="Tilt down" disabled>▼</button>
+            </div>
+            <p class="quiet">Each press sends a short movement.</p>
+          </div>
+        </section>
+        <section>
           <div class="section-head"><h2>Position</h2></div>
           <dl class="rows"><div class="row"><dt>Cube / GNSS</dt><dd id="telemetry">Not configured</dd></div></dl>
           <p class="quiet">Cube position and RTK telemetry are not integrated yet.</p>
@@ -178,6 +202,36 @@
     const image = element('view');
     const stage = element('stage');
     let retryTimer = null;
+    let gimbalEnabled = false;
+    const gimbalButtons = [...document.querySelectorAll('[data-direction]')];
+
+    async function refreshGimbal() {
+      try {
+        const response = await fetch('/api/gimbal', {cache: 'no-store'});
+        if (!response.ok) throw new Error('Gimbal status unavailable');
+        const status = await response.json();
+        gimbalEnabled = status.enabled;
+        element('gimbalStatus').textContent = status.enabled ? 'Controls available' : status.reason;
+      } catch (_) {
+        gimbalEnabled = false;
+        element('gimbalStatus').textContent = 'Gimbal status unavailable';
+      }
+      element('gimbalToken').disabled = !gimbalEnabled;
+      gimbalButtons.forEach(button => { button.disabled = !gimbalEnabled; });
+    }
+    gimbalButtons.forEach(button => button.addEventListener('click', async () => {
+      gimbalButtons.forEach(item => { item.disabled = true; });
+      try {
+        const response = await fetch('/api/gimbal/move', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({direction: button.dataset.direction, token: element('gimbalToken').value})});
+        const result = await response.json();
+        element('gimbalStatus').textContent = response.ok ? 'Movement sent' : (result.detail || 'Movement unavailable');
+      } catch (_) {
+        element('gimbalStatus').textContent = 'Movement unavailable';
+      } finally {
+        setTimeout(() => gimbalButtons.forEach(item => { item.disabled = !gimbalEnabled; }), 500);
+      }
+    }));
+    refreshGimbal();
 
     function retryStream() {
       if (retryTimer !== null) return;
