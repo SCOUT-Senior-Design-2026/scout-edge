@@ -6,6 +6,7 @@ from scout.gimbal_telemetry import GimbalTelemetry
 class Message:
     roll, pitch, yaw, yaw_absolute = 1.0, 179.3, 1.8, 120.0
     pointing_a, pointing_b, pointing_c = 0, 2, 1
+    param_id, param_value = 'MAV_TS_ENCNT', 0.0
     def __init__(self, kind, system=1, component=154):
         self.kind, self.system, self.component = kind, system, component
     def get_srcSystem(self): return self.system
@@ -19,10 +20,12 @@ class GimbalTelemetryTest(unittest.TestCase):
         sensor = GimbalTelemetry()
         sensor._accept(Message('MOUNT_ORIENTATION'), 10)
         sensor._accept(Message('MOUNT_STATUS'), 10.1)
+        sensor._accept(Message('PARAM_VALUE'), 10.2)
         result = sensor.snapshot()
         self.assertEqual(result['status'], 'live')
         self.assertEqual(result['attitude']['pitch'], 179.3)
         self.assertEqual(result['encoder']['yaw'], 1)
+        self.assertEqual(result['encoder_units'], 'centidegrees')
         self.assertEqual(result['age_ms'], 500)
 
     @patch('scout.gimbal_telemetry.time.monotonic', return_value=14)
@@ -30,6 +33,12 @@ class GimbalTelemetryTest(unittest.TestCase):
         sensor = GimbalTelemetry()
         sensor._accept(Message('MOUNT_ORIENTATION', component=1), 13)
         self.assertEqual(sensor.snapshot()['status'], 'unavailable')
+
+    @patch('scout.gimbal_telemetry.time.monotonic', return_value=20)
+    def test_encoder_mode_expires(self, clock):
+        sensor = GimbalTelemetry()
+        sensor._accept(Message('PARAM_VALUE'), 9)
+        self.assertIsNone(sensor.snapshot()['encoder_units'])
         sensor._accept(Message('MOUNT_ORIENTATION'), 10)
         self.assertIsNone(sensor.snapshot()['attitude'])
         self.assertEqual(sensor.snapshot()['status'], 'unavailable')

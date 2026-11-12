@@ -99,5 +99,14 @@ class GimbalTest(unittest.TestCase):
             release.set()
             thread.join(1)
 
+    @patch('scout.gimbal.time.sleep', return_value=None)
+    @patch('pymavlink.mavutil.mavlink_connection')
+    def test_gremsy_sdk_command_identity(self, connect, sleep):
+        connect.return_value = Link()
+        control = GimbalControl('token', True, True)
+        control.move('up', 'token')
+        self.assertEqual(connect.call_args.kwargs['source_system'], 1)
+        self.assertEqual(connect.call_args.kwargs['source_component'], 193)
+
 
 if __name__ == '__main__': unittest.main()

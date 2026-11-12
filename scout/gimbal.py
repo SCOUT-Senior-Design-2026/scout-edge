@@ -58,7 +58,7 @@ class GimbalControl:
             if now - self.last_command < .5:
                 raise GimbalUnavailable('Wait before the next movement')
             self.last_command = now
-            if not mavlink_lock.acquire(timeout=.3):
+            if not mavlink_lock.acquire(timeout=.7):
                 raise GimbalUnavailable('Gimbal communication is busy; try again')
             try:
                 self._move_locked(pitch, yaw)
@@ -73,7 +73,8 @@ class GimbalControl:
         else:
             os.environ.setdefault('MAVLINK20', '1')
             from pymavlink import mavutil
-            link = mavutil.mavlink_connection('udpout:192.168.144.240:14566', source_system=246, source_component=190)
+            # Gremsy's Payload SDK sends gimbal commands as system 1 / onboard computer 3.
+            link = mavutil.mavlink_connection('udpout:192.168.144.240:14566', source_system=1, source_component=193)
         try:
             link.mav.heartbeat_send(6, 8, 0, 0, 0)
             msg = link.recv_match(type='GIMBAL_DEVICE_ATTITUDE_STATUS', blocking=True, timeout=2)

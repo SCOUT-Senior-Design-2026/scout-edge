@@ -184,6 +184,11 @@
               <div class="row"><dt>Reported yaw</dt><dd id="gimbalYaw" class="value">—</dd></div>
             </dl>
             <p class="quiet">Attitude telemetry; not mechanical-axis angles.</p>
+            <dl class="rows" aria-label="Gimbal encoder angles">
+              <div class="row"><dt>Encoder roll</dt><dd id="encoderRoll" class="value">—</dd></div>
+              <div class="row"><dt>Encoder pitch</dt><dd id="encoderPitch" class="value">—</dd></div>
+              <div class="row"><dt>Encoder yaw</dt><dd id="encoderYaw" class="value">—</dd></div>
+            </dl>
             <input class="gimbal-token" id="gimbalToken" type="password" placeholder="Operator token" aria-label="Gimbal operator token" autocomplete="off" disabled>
             <button class="gimbal-enable" id="gimbalEnable" type="button" aria-pressed="false">Enable gimbal</button>
             <button id="gimbalJoystick" class="gimbal-joystick" type="button" aria-label="Gimbal joystick. Drag and release for a short movement, or use arrow keys." disabled><span id="gimbalKnob" class="gimbal-knob" aria-hidden="true"></span></button>
@@ -217,6 +222,11 @@
       for (const [id, field] of [['gimbalRoll', 'roll'], ['gimbalPitch', 'pitch'], ['gimbalYaw', 'yaw']]) {
         const value = attitude?.[field];
         element(id).textContent = Number.isFinite(value) ? `${value.toFixed(1)}°` : '—';
+      }
+      const encoder = telemetry?.encoder_units === 'centidegrees' ? telemetry.encoder : null;
+      for (const [id, field] of [['encoderRoll', 'roll'], ['encoderPitch', 'pitch'], ['encoderYaw', 'yaw']]) {
+        const value = encoder?.[field];
+        element(id).textContent = Number.isFinite(value) ? `${(value / 100).toFixed(2)}°` : '—';
       }
     }
     async function pollGimbalTelemetry() {
