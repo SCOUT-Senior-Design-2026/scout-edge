@@ -178,6 +178,12 @@
           <div class="section-head"><h2>Gimbal</h2></div>
           <div class="gimbal-controls">
             <p class="quiet" id="gimbalStatus" role="status">Checking controls…</p>
+            <dl class="rows" aria-label="Gimbal reported attitude">
+              <div class="row"><dt>Reported roll</dt><dd id="gimbalRoll" class="value">—</dd></div>
+              <div class="row"><dt>Reported pitch</dt><dd id="gimbalPitch" class="value">—</dd></div>
+              <div class="row"><dt>Reported yaw</dt><dd id="gimbalYaw" class="value">—</dd></div>
+            </dl>
+            <p class="quiet">Attitude telemetry; not mechanical-axis angles.</p>
             <input class="gimbal-token" id="gimbalToken" type="password" placeholder="Operator token" aria-label="Gimbal operator token" autocomplete="off" disabled>
             <button class="gimbal-enable" id="gimbalEnable" type="button" aria-pressed="false">Enable gimbal</button>
             <button id="gimbalJoystick" class="gimbal-joystick" type="button" aria-label="Gimbal joystick. Drag and release for a short movement, or use arrow keys." disabled><span id="gimbalKnob" class="gimbal-knob" aria-hidden="true"></span></button>
@@ -206,12 +212,27 @@
     let joystickBusy = false;
     let joystickPointer = null;
     let joystickVector = {x: 0, y: 0};
+    function displayGimbalTelemetry(telemetry) {
+      const attitude = telemetry?.status === 'live' ? telemetry.attitude : null;
+      for (const [id, field] of [['gimbalRoll', 'roll'], ['gimbalPitch', 'pitch'], ['gimbalYaw', 'yaw']]) {
+        const value = attitude?.[field];
+        element(id).textContent = Number.isFinite(value) ? `${value.toFixed(1)}°` : '—';
+      }
+    }
+    async function pollGimbalTelemetry() {
+      try {
+        const response = await fetch('/api/gimbal', {cache: 'no-store'});
+        if (!response.ok) throw new Error('Status unavailable');
+        displayGimbalTelemetry((await response.json()).telemetry);
+      } catch (_) { displayGimbalTelemetry(null); }
+    }
 
     async function refreshGimbal() {
       try {
         const response = await fetch('/api/gimbal', {cache: 'no-store'});
         if (!response.ok) throw new Error('Gimbal status unavailable');
         const status = await response.json();
+        displayGimbalTelemetry(status.telemetry);
         gimbalAvailable = status.enabled;
         gimbalWatchdogVerified = Boolean(status.watchdog_verified);
         if (!gimbalAvailable) gimbalEnabled = false;
@@ -269,7 +290,7 @@
       try {
         const response = await fetch('/api/gimbal/move', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({x: vector.x, y: vector.y, token: element('gimbalToken').value})});
         const result = await response.json();
-        element('gimbalStatus').textContent = response.ok ? 'Movement sent' : (result.detail || 'Movement unavailable');
+        element('gimbalStatus').textContent = response.ok ? 'Command sent · movement not confirmed' : (result.detail || 'Movement unavailable');
       } catch (_) {
         element('gimbalStatus').textContent = 'Movement unavailable';
       } finally {
@@ -300,6 +321,7 @@
       if (vectors[event.key] && !event.repeat) { event.preventDefault(); sendJoystick(vectors[event.key]); }
     });
     refreshGimbal();
+    setInterval(pollGimbalTelemetry, 2000);
 
     function retryStream() {
       if (retryTimer !== null) return;

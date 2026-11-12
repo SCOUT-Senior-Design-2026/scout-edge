@@ -1,10 +1,13 @@
 import unittest
+import threading
 from unittest.mock import patch
 from scout.gimbal import GimbalControl, GimbalUnavailable
+from scout.mavlink_transport import lock as mavlink_lock
 
 
 class Message:
     failure_flags = 0
+    flags = 32
     def get_srcSystem(self): return 1
     def get_srcComponent(self): return 154
 
@@ -37,6 +40,8 @@ class GimbalTest(unittest.TestCase):
         control = GimbalControl('token', True, True, lambda: link)
         control.move('up', 'token')
         self.assertEqual(len(link.commands), 2)
+        self.assertEqual(link.commands[0][2], 32)
+        self.assertEqual(link.commands[1][2], 32)
         self.assertLess(link.commands[0][5], 0)
         self.assertEqual(link.commands[1][4:7], (0.0, 0.0, 0.0))
         self.assertTrue(link.closed)
@@ -74,6 +79,25 @@ class GimbalTest(unittest.TestCase):
         for x, y in ((float('nan'), 0), (0, 0), (1, 1), (1.1, 0)):
             with self.subTest(x=x, y=y), self.assertRaises(ValueError):
                 control.move(None, 'token', x, y)
+
+    def test_busy_telemetry_does_not_queue_a_movement(self):
+        acquired, release = threading.Event(), threading.Event()
+        def hold():
+            with mavlink_lock:
+                acquired.set()
+                release.wait(2)
+        thread = threading.Thread(target=hold)
+        thread.start()
+        self.assertTrue(acquired.wait(1))
+        link = Link()
+        try:
+            control = GimbalControl('token', True, True, lambda: link)
+            with self.assertRaises(GimbalUnavailable):
+                control.move('up', 'token')
+            self.assertEqual(link.commands, [])
+        finally:
+            release.set()
+            thread.join(1)
 
 
 if __name__ == '__main__': unittest.main()

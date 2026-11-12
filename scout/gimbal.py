@@ -5,6 +5,8 @@ import os
 import threading
 import time
 
+from .mavlink_transport import lock as mavlink_lock
+
 
 class GimbalUnavailable(RuntimeError):
     pass
@@ -56,27 +58,35 @@ class GimbalControl:
             if now - self.last_command < .5:
                 raise GimbalUnavailable('Wait before the next movement')
             self.last_command = now
-            if self.connection_factory:
-                link = self.connection_factory()
-            else:
-                os.environ.setdefault('MAVLINK20', '1')
-                from pymavlink import mavutil
-                link = mavutil.mavlink_connection('udpout:192.168.144.240:14566', source_system=246, source_component=190)
+            if not mavlink_lock.acquire(timeout=.3):
+                raise GimbalUnavailable('Gimbal communication is busy; try again')
             try:
-                link.mav.heartbeat_send(6, 8, 0, 0, 0)
-                msg = link.recv_match(type='GIMBAL_DEVICE_ATTITUDE_STATUS', blocking=True, timeout=2)
-                if msg is None or msg.get_srcSystem() != 1 or msg.get_srcComponent() != 154 or msg.failure_flags:
-                    raise GimbalUnavailable('No healthy Lynx gimbal feedback')
-                try:
-                    self._send_rate(link, math.radians(2 * pitch), math.radians(2 * yaw))
-                    time.sleep(.15)
-                finally:
-                    self._send_rate(link, 0.0, 0.0)
+                self._move_locked(pitch, yaw)
             finally:
-                link.close()
+                mavlink_lock.release()
         finally:
             self.lock.release()
 
+    def _move_locked(self, pitch, yaw):
+        if self.connection_factory:
+            link = self.connection_factory()
+        else:
+            os.environ.setdefault('MAVLINK20', '1')
+            from pymavlink import mavutil
+            link = mavutil.mavlink_connection('udpout:192.168.144.240:14566', source_system=246, source_component=190)
+        try:
+            link.mav.heartbeat_send(6, 8, 0, 0, 0)
+            msg = link.recv_match(type='GIMBAL_DEVICE_ATTITUDE_STATUS', blocking=True, timeout=2)
+            if msg is None or msg.get_srcSystem() != 1 or msg.get_srcComponent() != 154 or msg.failure_flags:
+                raise GimbalUnavailable('No healthy Lynx gimbal feedback')
+            try:
+                self._send_rate(link, msg.flags, math.radians(2 * pitch), math.radians(2 * yaw))
+                time.sleep(.15)
+            finally:
+                self._send_rate(link, msg.flags, 0.0, 0.0)
+        finally:
+            link.close()
+
     @staticmethod
-    def _send_rate(link, pitch, yaw):
-        link.mav.gimbal_device_set_attitude_send(1, 154, 0, [float('nan')] * 4, 0.0, pitch, yaw)
+    def _send_rate(link, flags, pitch, yaw):
+        link.mav.gimbal_device_set_attitude_send(1, 154, flags, [float('nan')] * 4, 0.0, pitch, yaw)

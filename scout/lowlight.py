@@ -5,6 +5,8 @@ import time
 import cv2
 import numpy as np
 
+from .mavlink_transport import serialized
+
 
 class LowLightPolicy:
     """Use a timed visible probe to recover when only one output is available."""
@@ -49,6 +51,7 @@ class LowLightPolicy:
 
 class GremsyView:
     """Change the main stream view via acknowledged MAVLink camera parameters."""
+    @serialized
     def __init__(self, address='192.168.144.240:14566'):
         os.environ.setdefault('MAVLINK20', '1')
         from pymavlink import mavutil
@@ -67,7 +70,9 @@ class GremsyView:
             self.link.close()
             raise RuntimeError('Expected a visible Lynx source before enabling automatic switching')
 
+    @serialized
     def set_mode(self, thermal):
+        self.link.mav.heartbeat_send(6, 8, 0, 0, 0)
         value = 2 if thermal else self.original
         self.link.mav.param_ext_set_send(1, 101, b'C_SOURCE', bytes([value]) + bytes(127), 5)
         end = time.monotonic() + 3

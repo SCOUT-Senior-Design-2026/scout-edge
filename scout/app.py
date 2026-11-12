@@ -14,6 +14,7 @@ from .detectors import COCO_NAMES, create_detector
 from .tracking import create_tracked_detector
 from .lowlight import GremsyView, LowLightPolicy
 from .gimbal import GimbalControl, GimbalUnavailable
+from .gimbal_telemetry import GimbalTelemetry
 
 ROOT = Path(__file__).parent
 LYNX_SOURCE = 'rtsp://192.168.144.240:8554/payload'
@@ -245,11 +246,14 @@ def create_app(source=LYNX_SOURCE, detector_mode=None, engine_path=None):
     if not 1 <= preview_fps <= 60:
         raise ValueError('SCOUT_PREVIEW_FPS must be between 1 and 60')
     pipe.stats['preview_limit_fps'] = preview_fps
+    gimbal_telemetry = GimbalTelemetry()
 
     @asynccontextmanager
     async def lifespan(app):
         pipe.start()
+        gimbal_telemetry.start()
         yield
+        gimbal_telemetry.close()
         pipe.close()
 
     app = FastAPI(title='SCOUT Edge Vision', lifespan=lifespan)
@@ -272,7 +276,7 @@ def create_app(source=LYNX_SOURCE, detector_mode=None, engine_path=None):
 
     @app.get('/api/gimbal')
     async def gimbal_status():
-        return app.state.gimbal.status()
+        return {**app.state.gimbal.status(), 'telemetry': gimbal_telemetry.snapshot()}
 
     @app.post('/api/gimbal/move')
     async def gimbal_move(move: GimbalMove):
